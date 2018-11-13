@@ -9,7 +9,7 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     "passport-jwt": "^4.0.0",
     "react-redux": "^5.0.7",
     "serve": "^10.1.1",
+    "react-scripts": "1.0.11",
     "socket.io": "^1.7.3",
     "uuws": "^0.7.1",
     "uws": "^99.0.0",
