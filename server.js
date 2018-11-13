@@ -44,7 +44,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
@@ -76,6 +76,7 @@ const io = new SocketIo(server,{ path: '/api/chat'})
  //        userss.push(socket.name);
  //        io.sockets.emit('connectedUser', userss);
  //    });
+ console.log("fsfd");
     socket.on('chat mounted', function(user) {
       socket.emit('receive socket', socket.id)
     })
@@ -86,7 +87,6 @@ const io = new SocketIo(server,{ path: '/api/chat'})
       socket.join(channel.name)
     })
     socket.on('send message', function(msg) {
-      console.log(msg);
      io.sockets.emit('new message',msg);
     });
     socket.on('new channel', function(channel) {

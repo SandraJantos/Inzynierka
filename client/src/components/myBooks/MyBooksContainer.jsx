@@ -28,7 +28,7 @@ class MyBooksContainer extends Component {
 	createBook = () => {
 		this.props.createBook(this.state)
 	}
-	
+
 	render() {
 		const {books} = this.props;
 		return (
@@ -55,7 +55,6 @@ function mapDispatchToProps(dispatch) {
 		createBook: (r) => dispatch(booksAction.createBook(r)),
 		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
 		getCurrentUser: (r) => dispatch(loginAction.getCurrentUser(r)),
-
 	}
 }
 

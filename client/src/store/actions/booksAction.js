@@ -4,7 +4,7 @@ export const BOOK_RECEIVED = 'BOOK_RECEIVED';
 export const BOOKS_RECEIVED = 'BOOKS_RECEIVED';
 
 export const booksReceivedAction = (books) => {
-  console.log(books);
+  console.log(books);  
   return {
     type: BOOKS_RECEIVED,
     books
@@ -15,7 +15,7 @@ export const bookReceivedAction = (book) => {
   return {
     type: BOOK_RECEIVED,
     book
-  };
+  }; 
 }
 export const createBook = (r) => dispatch => {
   console.log(r);
