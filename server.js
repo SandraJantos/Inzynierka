@@ -12,6 +12,9 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
+
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 //set env vars
 const bodyParser = require('body-parser');
 
@@ -35,7 +38,9 @@ app.use('/api/channel',channel);
 //   publicPath: webpackConfig.output.publicPath
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
-
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 //load routers
 app.use(cors())
 mongoose.connect(db, { useNewUrlParser: true })
@@ -48,7 +53,7 @@ const port = process.env.PORT || 5000;
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
-//     console.log(err);
+//     consoles.log(err);
 //     return;
 //   }
 //   console.log('server listening on port: %s', port);
