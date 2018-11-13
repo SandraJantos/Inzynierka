@@ -51,5 +51,8 @@
     "validator": "^10.8.0",
     "ws": "^6.1.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "nodemon": "^1.18.4",
+    "react-scripts": "1.0.11"
+  }
 }
