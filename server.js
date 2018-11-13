@@ -13,7 +13,7 @@ const channel = require('./routes/api/channel');
 
 const app = express(); //
 
-app.use(express.static(path.join(__dirname, 'client/public')));
+//app.use(express.static(path.join(__dirname, 'client/public')));
 
 //set env vars
 const bodyParser = require('body-parser');
@@ -38,9 +38,15 @@ app.use('/api/channel',channel);
 //   publicPath: webpackConfig.output.publicPath
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/public/index.html'));
-});
+
+if (process.env.NODE_ENV === 'production') {
+  // Serve any static files
+  app.use(express.static(path.join(__dirname, 'client/build')));
+  // Handle React routing, return all requests to React app
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  });
+}
 //load routers
 app.use(cors())
 mongoose.connect(db, { useNewUrlParser: true })
