@@ -13,7 +13,7 @@ const channel = require('./routes/api/channel');
 
 const app = express(); //
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/public')));
 
 //set env vars
 const bodyParser = require('body-parser');
@@ -39,7 +39,7 @@ app.use('/api/channel',channel);
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+  res.sendFile(path.join(__dirname+'/client/public/index.html'));
 });
 //load routers
 app.use(cors())
