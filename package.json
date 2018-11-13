@@ -8,8 +8,7 @@
     "server": "nodemon server.js",
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -30,7 +29,6 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-handlebars": "^3.0.0",
-    "foobar": "^1.1.0",
     "fs": "0.0.1-security",
     "gridfs-stream": "^1.1.1",
     "jsonwebtoken": "^8.3.0",
@@ -39,20 +37,19 @@
     "multer": "^1.4.1",
     "multer-gridfs-storage": "^3.2.3",
     "node": "^8.10.0",
-    "nodemon": "^1.18.4",
+    "parallelshell": "^3.0.2",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "react-redux": "^5.0.7",
-    "serve": "^10.1.1",
     "react-scripts": "1.0.11",
     "socket.io": "^1.7.3",
     "uuws": "^0.7.1",
     "uws": "^99.0.0",
     "validator": "^10.8.0",
+    "watchman": "^1.0.0",
     "ws": "^6.1.0"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4",
-    "react-scripts": "1.0.11"
+    "nodemon": "^1.18.4"
   }
 }
