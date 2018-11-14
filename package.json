@@ -9,7 +9,7 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npm run client"
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,10 @@
   "bugs": {
     "url": "https://github.com/SandraJantos/Inzynierka/issues"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
