@@ -13,8 +13,17 @@ const channel = require('./routes/api/channel');
 
 const app = express(); //
 //const dev = app.get('env') !== 'production';
+const port = process.env.PORT || 5000;
+  if (process.env.NODE_ENV === 'production') {
+  // Exprees will serve up production assets
+  app.use(express.static('client/build'));
 
-
+  // Express serve up index.html file if it doesn't recognize route
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
 //app.use(express.static(path.join(__dirname, 'client')));
 
 //set env vars
@@ -50,7 +59,7 @@ mongoose.connect(db, { useNewUrlParser: true })
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-const port = process.env.PORT || 5000;
+
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
