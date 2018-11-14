@@ -15,10 +15,13 @@ class PlannerContainer extends Component {
 	componentDidMount(){
 		this.props.getBooksList();
 	}
+	  changed = (id,status) => {
+	 this.props.updateBookStatus(id,status)
+  }
   render() {
   	const {books} = this.props;
     return (
-        <Planner  books={books}/>
+        <Planner changed={this.changed} books={books}/>
     );
   } 
 }
@@ -33,6 +36,7 @@ function mapStateToProps (state,ownProps) {
 function mapDispatchToProps(dispatch) {
 	return {
 		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
+		updateBookStatus: (id,status) => dispatch(booksAction.updateBookStatus(id,status)),
 	
 	} 
 }

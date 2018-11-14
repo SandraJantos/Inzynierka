@@ -36,6 +36,12 @@ export const getBooksList = () => dispatch => {
   .then(e => dispatch(booksReceivedAction(e.data)))
   .catch(err => console.log(err))
  }
+
+ export const updateBookStatus = (id,state) => dispatch => {
+  axios.patch('/api/books/'+id,{state})
+  .then(e => dispatch(getBooksList()))
+  .catch(err => console.log(err))
+ }
 // export const getBook = (id) => dispatch => {
 //   axios.get('/api/books/'+id+'/')
 //   .then(e => dispatch(bookReceivedAction(e.data)))
@@ -44,4 +50,5 @@ export const getBooksList = () => dispatch => {
 export default {
  createBook,
  getBooksList,
+ updateBookStatus
 }   
