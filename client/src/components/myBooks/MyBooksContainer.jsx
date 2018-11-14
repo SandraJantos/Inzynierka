@@ -31,6 +31,7 @@ class MyBooksContainer extends Component {
 
 	render() {
 		const {books} = this.props;
+		console.log(books);
 		return (
 			<MyBooks formData={this.state} books={books}
 			onChange={v=>this.setState(v)} 

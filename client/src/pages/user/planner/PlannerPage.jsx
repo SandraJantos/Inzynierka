@@ -5,7 +5,7 @@ class PlannerPage extends Component {
 
   render() {
     return (
-        <PlannerContainer userId={(this.props.location.state||{}).id} />
+        <PlannerContainer location={this.props.location} />
     );
   } 
 }
