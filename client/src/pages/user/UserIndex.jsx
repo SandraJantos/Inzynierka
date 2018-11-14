@@ -6,6 +6,7 @@ import MyBooksPage from './myBooks/MyBooksPage';
 import ProfilePage from '../common/profile/ProfilePage';
 import ChatPage from './chat/ChatPage';
 import ChatDetailPage from './chatDetail/ChatDetailPage';
+import PlannerPage from './planner/PlannerPage';
 
 
 
@@ -21,8 +22,10 @@ class UserIndex extends Component {
           <Route exact path="/:user" component={HomePage} />
           <Route exact path="/:user/myBooks" component={MyBooksPage} />
           <Route exact path="/:user/chat" component={ChatPage} />
+          <Route exact path="/:user/planner" component={PlannerPage} />
           <Route exact path="/profile/:user" component={ProfilePage} />
           <Route exact path={`/chatDetail/:chatListId`} component={ChatDetailPage} />
+
         </Switch>
       </UserPage>
       </div>

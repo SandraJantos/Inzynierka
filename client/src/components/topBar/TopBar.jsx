@@ -29,7 +29,8 @@ class TopBar extends Component {
               <Link to={`${match.path}${(currentUser||{})._id}`}>HOME</Link>
               <Link to={`${match.path}${(currentUser||{})._id}/myBooks`}>my books</Link>
               <Link to={`${match.path}${(currentUser||{})._id}/chat/`}>chat</Link>
-
+              <Link to={`${match.path}${(currentUser||{})._id}/planner/`}>planner</Link>
+  
               <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut
               </li> 
