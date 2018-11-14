@@ -32,22 +32,14 @@
     "validator": "^10.8.0"
   },
   "scripts": {
-    "start": "node_modules/react-scripts/bin/react-scripts.js start",
-
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sass": "sass --watch src/styles/scss:src/styles/css --style compressed",
     "sass-nw": "sass src/styles/scss:src/styles/css"
   },
-  "devDependencies": {
-    "browser-sync": "^2.24.5",
-    "clone": "^2.1.2",
-    "react": "^16.6.3",
-    "react-dom": "^16.4.1",
-    "redux-devtools-extension": "^2.13.5",
-    "webpack-dev-server": "^3.1.4"
-  },
+
   "proxy": "http://localhost:5000",
   "eslintConfig": {
     "extends": "react-app"

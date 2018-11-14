@@ -17,7 +17,7 @@ export const bookReceivedAction = (book) => {
     book
   }; 
 }
-export const createBook = (r) => dispatch => {
+export const createBook = (r,date) => dispatch => {
   console.log(r);
   let formData = new FormData();
   formData.append('title', r.title);
@@ -25,6 +25,8 @@ export const createBook = (r) => dispatch => {
   formData.append('description', r.description);
   formData.append('isbn', r.isbn);
   formData.append('image', r.image);
+  formData.append('created', date);
+
     console.log(formData);
   axios.post('/api/books/', formData, 'multipart/form-data')
   .then(() => dispatch(getBooksList()))
