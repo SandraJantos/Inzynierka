@@ -12,14 +12,21 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
+//const dev = app.get('env') !== 'production';
+const port = process.env.PORT || 5000;
+
+//app.use(express.static(path.join(__dirname, 'client')));
+
 //set env vars
 const bodyParser = require('body-parser');
 
-const db = require('./config/keys').mongoURI;
+const db = process.env.MONGODB_URI;
+
+//const db = require('./config/keys').mongoURI;
+
 const mongoose = require('mongoose');
 let loggedUsers = [];
 
-app.use(compression());
 //app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -35,7 +42,9 @@ app.use('/api/channel',channel);
 //   publicPath: webpackConfig.output.publicPath
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
-
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/public/index.html'));
+// });
 //load routers
 app.use(cors())
 mongoose.connect(db, { useNewUrlParser: true })
@@ -44,11 +53,11 @@ mongoose.connect(db, { useNewUrlParser: true })
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-const port = 5000;
+
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
-//     console.log(err);
+//     consoles.log(err);
 //     return;
 //   }
 //   console.log('server listening on port: %s', port);
@@ -67,41 +76,41 @@ const server = app.listen(port,  function(err) {
 // const io = new SocketIo(server, {path: '/api/chat'})
 //const socketEvents = require('./socketEvents')(io);
 
-const io = new SocketIo(server,{ path: '/api/chat'}) 
-  io.on('connection', function(socket) {
-   // socket.join('general');
- // socket.on('connectedUser', (users) =>{
- //  console.log(users);
- //        socket.name = users;
- //        userss.push(socket.name);
- //        io.sockets.emit('connectedUser', userss);
- //    });
-    socket.on('chat mounted', function(user) {
-      socket.emit('receive socket', socket.id)
-    })
-    socket.on('leave channel', function(channel) {
-      socket.leave(channel)
-    })
-    socket.on('join channel', function(channel) {
-      socket.join(channel.name)
-    })
-    socket.on('send message', function(msg) {
-      console.log(msg);
-     io.sockets.emit('new message',msg);
-    });
-    socket.on('new channel', function(channel) {
-      io.sockets.emit('new channel', channel)
-    });
-    socket.on('typing', function (data) {
-      socket.broadcast.to(data.channel).emit('typing bc', data.user);
-    });
-    socket.on('stop typing', function (data) {
-      socket.broadcast.to(data.channel).emit('stop typing bc', data.user);
-    });
-    socket.on('new private channel', function(socketID, channel) {
-      socket.broadcast.to(socketID).emit('receive private channel', channel);
-    })
-  });
+// const io = new SocketIo(server,{ path: '/api/chat'}) 
+//   io.on('connection', function(socket) {
+//    // socket.join('general');
+//  // socket.on('connectedUser', (users) =>{yyyy
+//  //  console.log(users);
+//  //        socket.name = users;
+//  //        userss.push(socket.name);
+//  //        io.sockets.emit('connectedUser', userss);
+//  //    });
+//  console.log("fsfd");
+//     socket.on('chat mounted', function(user) {
+//       socket.emit('receive socket', socket.id)
+//     })
+//     socket.on('leave channel', function(channel) {
+//       socket.leave(channel)
+//     })
+//     socket.on('join channel', function(channel) {
+//       socket.join(channel.name)
+//     })
+//     socket.on('send message', function(msg) {
+//      io.sockets.emit('new message',msg);
+//     });
+//     socket.on('new channel', function(channel) {
+//       io.sockets.emit('new channel', channel)
+//     });
+//     socket.on('typing', function (data) {
+//       socket.broadcast.to(data.channel).emit('typing bc', data.user);
+//     });
+//     socket.on('stop typing', function (data) {
+//       socket.broadcast.to(data.channel).emit('stop typing bc', data.user);
+//     });
+//     socket.on('new private channel', function(socketID, channel) {
+//       socket.broadcast.to(socketID).emit('receive private channel', channel);
+//     })
+//   });
 //    
 
 // io.on('connection', function(socket) {
