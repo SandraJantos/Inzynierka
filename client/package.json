@@ -34,7 +34,6 @@
   "scripts": {
     "start": "./node_modules/react-scripts/bin/react-scripts.js start",
 
-   // "start": "parallelshell \"react-scripts start\" \"sass --watch src/styles/scss:src/styles/css --style compressed\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
