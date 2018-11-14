@@ -9,7 +9,7 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postinstall": "cd client && npm install && npm run build"
   },
   "repository": {
     "type": "git",
