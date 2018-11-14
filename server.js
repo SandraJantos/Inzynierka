@@ -12,7 +12,7 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
-const dev = app.get('env') !== 'production';
+//const dev = app.get('env') !== 'production';
 
 
 //app.use(express.static(path.join(__dirname, 'client')));
