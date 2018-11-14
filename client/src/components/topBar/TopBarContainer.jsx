@@ -22,7 +22,7 @@ class TopBarContainer extends Component {
 
 function mapStateToProps(state,ownProps) {
   return {
-    user: state.users.find(el => el._id === (ownProps.location.pathname.split('/')[1]))
+    user: (state.users).find(el => el._id === (ownProps.location.pathname.split('/')[1]))
   };
 }
 

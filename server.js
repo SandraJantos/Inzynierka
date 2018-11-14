@@ -14,13 +14,6 @@ const channel = require('./routes/api/channel');
 const app = express(); //
 const dev = app.get('env') !== 'production';
 
-app.use(express.static(path.join(__dirname, "client", "public")))
-
-// ...
-// Right before your app.listen(), add this:
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "public", "index.html"));
-});
 
 //app.use(express.static(path.join(__dirname, 'client')));
 
