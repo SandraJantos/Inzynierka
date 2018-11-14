@@ -23,11 +23,11 @@
   "cacheDirectories": [
     "node_modules",
     "client/node_modules"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
   ],
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
     "clone": "^2.1.2",
     "compression": "^1.7.3",
     "concurrently": "^4.0.1",
@@ -57,6 +57,8 @@
     "ws": "^6.1.0"
   },
   "devDependencies": {
+    "clone": "^2.1.2",
+    
     "nodemon": "^1.18.4"
   },
   "engines": {
