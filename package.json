@@ -20,12 +20,6 @@
   "bugs": {
     "url": "https://github.com/SandraJantos/Inzynierka/issues"
   },
-  "cacheDirectories": [
-    "node_modules",
-    "client/node_modules"
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.18.3",
-  ],
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
     "clone": "^2.1.2",
@@ -58,7 +52,7 @@
   },
   "devDependencies": {
     "clone": "^2.1.2",
-    
+
     "nodemon": "^1.18.4"
   },
   "engines": {
