@@ -13,7 +13,7 @@ const channel = require('./routes/api/channel');
 
 const app = express(); //
 
-app.use(express.static(path.join(__dirname, 'client/public')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 //set env vars
 const bodyParser = require('body-parser');
