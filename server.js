@@ -12,8 +12,17 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
+const dev = app.get('env') !== 'production';
 
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, "client", "public")))
+
+// ...
+// Right before your app.listen(), add this:
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "public", "index.html"));
+});
+
+//app.use(express.static(path.join(__dirname, 'client')));
 
 //set env vars
 const bodyParser = require('body-parser');
@@ -22,7 +31,6 @@ const db = require('./config/keys').mongoURI;
 const mongoose = require('mongoose');
 let loggedUsers = [];
 
-app.use(compression());
 //app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
@@ -38,9 +46,9 @@ app.use('/api/channel',channel);
 //   publicPath: webpackConfig.output.publicPath
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/public/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/public/index.html'));
+// });
 //load routers
 app.use(cors())
 mongoose.connect(db, { useNewUrlParser: true })
