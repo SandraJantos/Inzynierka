@@ -23,7 +23,7 @@ class TopBar extends Component {
             </button>
           </div>
           <div id="navbar" className="navbar-collapse collapse">
-            {Object.keys((currentUser||{})).length > 0 ?
+   {/*         {Object.keys((currentUser||{})).length > 0 ?
             <ul className="navLinks nav navbar-nav">
               <li>name: {(currentUser||{}).name}</li>
               <Link to={`${match.path}${(currentUser||{})._id}`}>HOME</Link>
@@ -38,7 +38,7 @@ class TopBar extends Component {
             <ul className="nav navbar-nav button-holder">
               <Link  to={`${match.path}login`}>Login</Link>
               <Link to={`registration`}>Register</Link>
-            </ul>}
+            </ul>}*/}
           </div>
         </div>
       </div>
