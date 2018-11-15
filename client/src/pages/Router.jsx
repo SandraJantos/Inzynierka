@@ -10,9 +10,10 @@ class Router extends Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/registration/" component={RegistrationPage} />
-          <Route path="/login/" component={LoginPage} />
-          <Route path="/" component={UserIndex} />
+          <Route path={`${process.env.registration}/`}  component={RegistrationPage} />
+          <Route path={`${process.env.login}/`} component={LoginPage} />
+          <Route path={`${process.env.PUBLIC_URL}/`} component={UserIndex} />
+
         </Switch>
       </BrowserRouter>
     );
