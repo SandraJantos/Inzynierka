@@ -4,12 +4,14 @@
   "description": "",
   "main": "index.js",
   "scripts": {
- 
-  "dev": "next",
-    "build": "next build",
-    "start": "next start",
-    "heroku-postbuild": "next build"
-          },
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run client\" \"npm run server\"",
+    "heroku-postbuild": "next npm run server"
+
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SandraJantos/Inzynierka.git"
@@ -21,6 +23,8 @@
   },
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
+        "next": "^3.0.0-beta16",
+
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
@@ -49,13 +53,8 @@
     "uuws": "^0.7.1",
     "uws": "^99.0.0",
     "validator": "^10.8.0",
-    "ws": "^6.1.0",
-        "next": "^3.0.0-beta16"
-
+    "ws": "^6.1.0"
   },
-  "engines": {
-        "node": "8.9.3"
-},
   "devDependencies": {
     "nodemon": "^1.18.4"
   }
