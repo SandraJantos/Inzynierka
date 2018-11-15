@@ -54,7 +54,10 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
   new Book(newBook).save().then(book => res.json({image:req.file,...book}));
   var id = newBook.user;
   User.findById( id, (err, data)=> {
+<<<<<<< HEAD
     console.log(data,"ddd");
+=======
+>>>>>>> 0fa7d03a6537fa2ba5cb14d9fa800a3baf42342e
     if (err) {
       return res.status(500).json({
         ok: false,
@@ -65,7 +68,11 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
     if (!data) {
       return res.status(400).json({
         ok: false,
+<<<<<<< HEAD
         errors: { message: 'No existe un data con ese ID' }
+=======
+        errors: { message: 'It doesn`t exist' }
+>>>>>>> 0fa7d03a6537fa2ba5cb14d9fa800a3baf42342e
       });
     }
 

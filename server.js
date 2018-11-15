@@ -12,11 +12,14 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
+<<<<<<< HEAD
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
 });
+=======
+>>>>>>> 0fa7d03a6537fa2ba5cb14d9fa800a3baf42342e
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
 
@@ -25,10 +28,17 @@ const port = process.env.PORT || 5000;
 //set env vars
 const bodyParser = require('body-parser');
 
+<<<<<<< HEAD
 const db = process.env.MONGODB_URI;
 
 //const db = require('./config/keys').mongoURI;
 let dbUrl = 'mongodb://superSam:superSam123@ds155299.mlab.com:55299/sam_db';
+=======
+//const db = process.env.MONGODB_URI;
+
+const db = require('./config/keys').mongoURI;
+
+>>>>>>> 0fa7d03a6537fa2ba5cb14d9fa800a3baf42342e
 const mongoose = require('mongoose');
 let loggedUsers = [];
 
@@ -119,6 +129,7 @@ const server = app.listen(port,  function(err) {
 //    
 
 // io.on('connection', function(socket) {
+<<<<<<< HEAD
 //  socket.on('new user', function(data,callback) {
 //    if (data in loggedUsers){
 //      callback(false)
@@ -129,3 +140,15 @@ const server = app.listen(port,  function(err) {
 //    }
 //  })
 // })
+=======
+// 	socket.on('new user', function(data,callback) {
+// 		if (data in loggedUsers){
+// 			callback(false)
+// 		} else{
+// 			callback(true);
+// 			socket.nickname = data,
+// 			loggedUsers[socket.nickname] = socket;
+// 		}
+// 	})
+// })
+>>>>>>> 0fa7d03a6537fa2ba5cb14d9fa800a3baf42342e
