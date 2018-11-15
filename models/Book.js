@@ -21,9 +21,14 @@ const BookSchema = new Schema({
 	},
 	image:{
 		type:Object,
-
-
 	},
+	state:{
+		type:String,
+    	default: 'unread'
+	},
+	created:{
+		type: Date 
+	}
 }); 
   
 module.exports = Book = mongoose.model('books',BookSchema);

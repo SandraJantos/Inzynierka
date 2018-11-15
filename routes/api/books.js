@@ -47,32 +47,30 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
   if (req.body.author) newBook.author = req.body.author;
   if (req.body.description) newBook.description = req.body.description;
   if (req.body.isbn) newBook.isbn = req.body.isbn;
+  if (req.body.created) newBook.created = req.body.created;
   if (req.file) newBook.image = req.file;
 
 
   new Book(newBook).save().then(book => res.json({image:req.file,...book}));
   var id = newBook.user;
-  User.findById( id, (err, producto)=> {
-    console.log(producto,"ddd");
+  User.findById( id, (err, data)=> {
+    console.log(data,"ddd");
     if (err) {
       return res.status(500).json({
         ok: false,
-        mensaje: 'Error al buscar producto',
         errors: err
       });
     }
 
-    if (!producto) {
+    if (!data) {
       return res.status(400).json({
         ok: false,
-        mensaje: 'No existe un producto con ese ID',
-        errors: { message: 'No existe un producto con ese ID' }
+        errors: { message: 'No existe un data con ese ID' }
       });
     }
 
-    producto.books.push(newBook);
-    console.log(producto);
-    producto.save();
+    data.books.push(newBook);
+    data.save();
   })
 })
 
@@ -95,5 +93,23 @@ router.get('/:id', (req, res, next) => {
 
   })
 })
+
+
+
+router.post(
+  '/:id',
+  (req, res) => {
+    Book.findOne({ _id: req.params.id }).then(profile => {
+      if (profile) {
+        Book.update(
+          { _id: req.params.id },
+          { $set: {state:req.body.state}}
+        ).then(profile => res.json(profile));
+      } else {
+        console.log("sd");
+      }
+    })
+  }
+);
 
 module.exports = router;
