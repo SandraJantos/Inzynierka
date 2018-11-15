@@ -44,7 +44,7 @@ function mapStateToProps (state,ownProps) {
 	console.log(ownProps);
 	return {
 		registartionAction:state.registartionAction,
-		books:state.books.filter(e => e.user === (ownProps.location.pathname.split('/')[1])),
+		books:state.books.filter(e => e.user === state.user.id),
 		book:state.book,
 		user:state.user
 	}

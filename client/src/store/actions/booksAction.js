@@ -44,11 +44,11 @@ export const getBooksList = () => dispatch => {
   .then(e => dispatch(getBooksList()))
   .catch(err => console.log(err))
  }
-// export const getBook = (id) => dispatch => {
-//   axios.get('/api/books/'+id+'/')
-//   .then(e => dispatch(bookReceivedAction(e.data)))
-//   .catch(err => console.log(err))
-// }
+export const getBook = (id) => dispatch => {
+  axios.get('/api/books/'+id+'/')
+  .then(e => dispatch(bookReceivedAction(e.data)))
+  .catch(err => console.log(err))
+}
 export default {
  createBook,
  getBooksList,

@@ -54,7 +54,7 @@ class HomeContainer extends Component {
 		const {users,match,books} = this.props; 
 		return (
 			<Fragment>
-			<Home books={books} currentUser={this.props.user.user} openChat={this.openChat}
+			<Home books={books} users={users} currentUser={this.props.user.user} openChat={this.openChat}
 			locations={(users||[]).length>0 ? 
 				(users||[]).filter(e =>e.location!==undefined).map((e,index) => (e.location.slice(1, -1).split(',')).concat(e))
 				: []} logout={this.props.logout}
