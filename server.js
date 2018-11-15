@@ -14,7 +14,7 @@ const channel = require('./routes/api/channel');
 const app = express(); //
 app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('*', (req,res) =>{
-      res.sendfile('client/public/index1.html'); 
+      res.sendfile('client/public/index.html'); 
 });
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
