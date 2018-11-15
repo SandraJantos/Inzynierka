@@ -11,7 +11,7 @@ const books = require('./routes/api/books');
 const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
-const app = express(); //
+const app = express(); 
 
 if (process.env.NODE_ENV === 'production'){
 app.use(express.static(path.join(__dirname, '/client/build')));
@@ -55,7 +55,9 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-mongoose.connect(dbUrl, { useMongoClient: true })
+
+mongoose.Promise = global.Promise;
+mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
     .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
