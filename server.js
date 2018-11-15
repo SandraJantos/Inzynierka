@@ -52,8 +52,8 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-mongoose.connect(dbUrl, { useMongoClient: true,useNewUrlParser: true })
-    .then(() => console.log("success"))
+mongoose.connect(dbUrl, { useMongoClient: true })
+    .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
 require('./config/passport')(passport);
