@@ -12,7 +12,7 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
-app.use(express.static(path.resolve(__dirname + '/client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname+'/client/build/index.html'));
@@ -59,6 +59,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 
+app.listen(port);
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
@@ -71,12 +72,12 @@ require('./config/passport')(passport);
 // const server = require('http').createServer(app);
 // const io = require('socket.io').listen(server);
 
-const server = app.listen(port,  function(err) {
-  if (err) {
-    return;
-  } 
-  console.log('server listening on port: %s', port);
-});
+// const server = app.listen(port,  function(err) {
+//   if (err) {
+//     return;
+//   } 
+//   console.log('server listening on port: %s', port);
+// });
 
 // const io = new SocketIo(server, {path: '/api/chat'})
 //const socketEvents = require('./socketEvents')(io);
