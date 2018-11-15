@@ -89,7 +89,7 @@ router.get('/:id', (req, res, next) => {
   Book.findOne({'image.filename': req.params.id}, (err, x) => {console.log(req.params.id);
     if (err) return res.sendStatus(404)
 
-      fs.createReadStream('public/uploads/'+req.params.id).pipe(res);
+      fs.createReadStream('./public/uploads/'+req.params.id).pipe(res);
 
   })
 })
