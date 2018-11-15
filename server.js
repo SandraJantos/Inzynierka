@@ -28,7 +28,7 @@ const bodyParser = require('body-parser');
 const db = process.env.MONGODB_URI;
 
 //const db = require('./config/keys').mongoURI;
-
+let dbUrl = 'mongodb://superSam:superSam123@ds155299.mlab.com:55299/sam_db';
 const mongoose = require('mongoose');
 let loggedUsers = [];
 
@@ -52,7 +52,7 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-mongoose.connect(process.env.MONGODB_URI)
+mongoose.connect(dbUrl, { useMongoClient: true,useNewUrlParser: true })
     .then(() => console.log("success"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
