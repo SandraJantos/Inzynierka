@@ -39,7 +39,6 @@ class TopBar extends Component {
             <ul className="nav navbar-nav button-holder">
               <Link  to={`${match.path}login`}>Login</Link>
               <Link to={`registration`}>Register</Link>
-              <Link to={`${match.path}chat`}>chat</Link>
             </ul>}
           </div>
         </div>
