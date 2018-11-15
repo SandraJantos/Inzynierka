@@ -12,11 +12,11 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
-app.use(express.static(path.resolve(__dirname + '/client/build')));
+// app.use(express.static(path.resolve(__dirname + '/client/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/build/index.html'));
+// });
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
 
@@ -27,7 +27,7 @@ const bodyParser = require('body-parser');
 
 //const db = process.env.MONGODB_URI;
 
-//const db = require('./config/keys').mongoURI;
+const db = require('./config/keys').mongoURI;
 
 const mongoose = require('mongoose');
 let loggedUsers = [];
@@ -52,9 +52,15 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-mongoose.connect(process.env.MONGODB_URI)
+// mongoose.connect(db)
+//     .then(() => console.log("success"))
+//     .catch(err => console.log(err))
+
+    mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("success"))
     .catch(err => console.log(err))
+
+    
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
@@ -119,13 +125,13 @@ const server = app.listen(port,  function(err) {
 //    
 
 // io.on('connection', function(socket) {
-// 	socket.on('new user', function(data,callback) {
-// 		if (data in loggedUsers){
-// 			callback(false)
-// 		} else{
-// 			callback(true);
-// 			socket.nickname = data,
-// 			loggedUsers[socket.nickname] = socket;
-// 		}
-// 	})
+//  socket.on('new user', function(data,callback) {
+//    if (data in loggedUsers){
+//      callback(false)
+//    } else{
+//      callback(true);
+//      socket.nickname = data,
+//      loggedUsers[socket.nickname] = socket;
+//    }
+//  })
 // })
