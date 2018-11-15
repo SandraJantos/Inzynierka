@@ -20,6 +20,9 @@
   "bugs": {
     "url": "https://github.com/SandraJantos/Inzynierka/issues"
   },
+  "engines": {
+    "node": "^8.10.0"
+  },
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
