@@ -12,9 +12,10 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req,res) =>{
-      res.sendfile('client/public/index.html'); 
+app.use(express.static(path.resolve(__dirname, 'client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client/build', 'index.html'));
 });
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
