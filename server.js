@@ -12,6 +12,10 @@ const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
 
 const app = express(); //
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
 
@@ -22,7 +26,7 @@ const bodyParser = require('body-parser');
 
 //const db = process.env.MONGODB_URI;
 
-const db = require('./config/keys').mongoURI;
+//const db = require('./config/keys').mongoURI;
 
 const mongoose = require('mongoose');
 let loggedUsers = [];
@@ -47,7 +51,7 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-mongoose.connect(db, { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI)
     .then(() => console.log("success"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
