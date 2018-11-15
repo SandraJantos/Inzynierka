@@ -66,7 +66,6 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
       return res.status(400).json({
         ok: false,
         errors: { message: 'No existe un data con ese ID' }
-        errors: { message: 'It doesn`t exist' }
       });
     }
 
