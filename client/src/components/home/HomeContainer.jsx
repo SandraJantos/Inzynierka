@@ -21,6 +21,8 @@ class HomeContainer extends Component {
 
 	componentDidMount(){
 		this.props.getUsersList();
+		this.props.getUsersList();
+
 	}
 
 	click = (i) => {
@@ -47,10 +49,10 @@ class HomeContainer extends Component {
 		this.props.createChannel(initLobby);
 	}
 	render() { 
-		const {users,match} = this.props; 
+		const {users,match,books} = this.props; 
 		return (
 			<Fragment>
-			<Home currentUser={this.props.user.user} openChat={this.openChat}
+			<Home books={books} currentUser={this.props.user.user} openChat={this.openChat}
 			locations={users.length>0 ? 
 				users.filter(e =>e.location!==undefined).map((e,index) => (e.location.slice(1, -1).split(',')).concat(e))
 				: []} logout={this.props.logout}
@@ -60,13 +62,15 @@ class HomeContainer extends Component {
 				);
 	} 
 }
-
+ 
 function mapStateToProps (state) {
 	return {
 		token: state.token,
 		user:state.user,
 		users:state.users,
-		registartionAction:state.registartionAction
+		registartionAction:state.registartionAction,
+		books:state.books,
+
 	}
 }
 

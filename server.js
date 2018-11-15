@@ -25,7 +25,7 @@ const port = process.env.PORT || 5000;
 //set env vars
 const bodyParser = require('body-parser');
 
-const db = process.env.MONGODB_URI;
+//const db = process.env.MONGODB_URI;
 
 //const db = require('./config/keys').mongoURI;
 
