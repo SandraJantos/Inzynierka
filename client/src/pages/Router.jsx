@@ -8,10 +8,10 @@ import UserIndex from './user/UserIndex';
 class Router extends Component { 
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename='/build'>
         <Switch>
-          <Route path={`${process.env.registration}/`}  component={RegistrationPage} />
-          <Route path={`${process.env.login}/`} component={LoginPage} />
+          <Route path={`${process.env.PUBLIC_URL}/registration}/`}  component={RegistrationPage} />
+          <Route path={`${process.env.PUBLIC_URL}/login/`} component={LoginPage} />
           <Route path={`${process.env.PUBLIC_URL}/`} component={UserIndex} />
 
         </Switch>

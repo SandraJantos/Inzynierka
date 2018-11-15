@@ -18,13 +18,13 @@ class UserIndex extends Component {
       <div> 
       <UserPage> 
         <Switch>
-          <Route exact path="/" component={HomePage} />
-          <Route exact path="/:user" component={HomePage} />
-          <Route exact path="/:user/myBooks" component={MyBooksPage} />
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomePage} />
+          <Route exact path={`${process.env.PUBLIC_URL}/:user`}  component={HomePage} />
+          <Route exact path={`${process.env.PUBLIC_URL}/:user/myBooks`} component={MyBooksPage} />
 {/*          <Route exact path="/:user/chat" component={ChatPage} />
-*/}          <Route exact path="/:user/planner" component={PlannerPage} />
-          <Route exact path="/profile/:user" component={ProfilePage} />
-          <Route exact path={`/chatDetail/:chatListId`} component={ChatDetailPage} />
+*/}          <Route exact path={`${process.env.PUBLIC_URL}/:user/planner`} component={PlannerPage} />
+          <Route exact path={`${process.env.PUBLIC_URL}/profile/:user`} component={ProfilePage} />
+          <Route exact path={`${process.env.PUBLIC_URL}/chatDetail/:chatListId`} component={ChatDetailPage} />
 
         </Switch>
       </UserPage>
