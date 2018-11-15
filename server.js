@@ -139,4 +139,3 @@ const io = new SocketIo(server,{ path: '/api/chat'})
 // })
 
 
-    "mongoose": "^4.10.8",
