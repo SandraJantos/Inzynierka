@@ -28,8 +28,7 @@ class TopBar extends Component {
               <li>name: {(currentUser||{}).name}</li>
               <Link to={`${match.path}${(currentUser||{})._id}`}>HOME</Link>
               <Link to={`${match.path}${(currentUser||{})._id}/myBooks`}>my books</Link>
-              <Link to={`${match.path}${(currentUser||{})._id}/chat/`}>chat</Link>
-              <Link to={`${match.path}${(currentUser||{})._id}/planner/`}>planner</Link>
+                <Link to={`${match.path}${(currentUser||{})._id}/planner/`}>planner</Link>
   
               <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut
@@ -39,7 +38,6 @@ class TopBar extends Component {
             <ul className="nav navbar-nav button-holder">
               <Link  to={`${match.path}login`}>Login</Link>
               <Link to={`registration`}>Register</Link>
-              <Link to={`${match.path}chat`}>chat</Link>
             </ul>}
           </div>
         </div>

@@ -11,11 +11,13 @@ class Home extends Component {
     books.slice(0).sort((a,b)=>new Date(a.created) - new Date(b.created));
     return (
     	<Fragment >
-    		{books.map(el => <div className="block">
+    	<div className="container">
+    		{books.map(el => <div className="col-sm-4 block">
 				<img style={{width:'200px'}} src={`http://localhost:5000/api/books/${(el.image||{}).filename}`}  />
     			{el.title}
     			{moment(el.created).format('DD.MM.YYYY HH:mm')}
     			</div>)}
+    		</div>
       		<MapContainer {...rest} />
     		}
       	</Fragment>

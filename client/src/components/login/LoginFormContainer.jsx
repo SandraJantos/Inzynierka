@@ -3,9 +3,6 @@ import { connect } from 'react-redux';
 import LoginForm from './LoginForm';
 import loginAction from 'store/actions/loginAction';
 import { withRouter } from 'react-router'
-import io from 'socket.io-client';
-
-const socket = io();
 
 class LoginFormContainer extends Component { 
 	constructor (props) {

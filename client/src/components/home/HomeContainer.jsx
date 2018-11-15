@@ -4,6 +4,8 @@ import Home from './Home';
 import userAction from 'store/actions/userAction';
 import loginAction from 'store/actions/loginAction';
 import channelAction from 'store/actions/channelAction';
+import booksAction from 'store/actions/booksAction';
+
 import { withRouter } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 
@@ -21,7 +23,7 @@ class HomeContainer extends Component {
 
 	componentDidMount(){
 		this.props.getUsersList();
-		this.props.getUsersList();
+		this.props.getBooksList();
 
 	}
 
@@ -80,7 +82,9 @@ function mapDispatchToProps(dispatch) {
 		getCurrentUser: () => dispatch(userAction.getCurrentUser()),
 		logout: () => dispatch(loginAction.logout()),
 		getUsersList: () => dispatch(userAction.getUsersList()),
-		createChannel: (a) => dispatch(channelAction.createChannel(a))
+		createChannel: (a) => dispatch(channelAction.createChannel(a)),
+		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
+
 
 
 	} 
