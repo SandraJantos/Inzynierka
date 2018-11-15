@@ -51,6 +51,9 @@
     "validator": "^10.8.0",
     "ws": "^6.1.0"
   },
+  "engines": {
+        "node": "8.9.3"
+},
   "devDependencies": {
     "nodemon": "^1.18.4"
   }
