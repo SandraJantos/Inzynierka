@@ -16,6 +16,7 @@
     "parallelshell": "^3.0.1",
     "react-datepicker": "^1.7.0",
     "react-dom": "^16.5.2",
+    "react-dom-server": "0.0.5",
     "react-google-maps": "^9.4.5",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",
