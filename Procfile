@@ -1,1 +1,1 @@
-web: npm run build && npm start -- --port 5000
+web: npm run server
