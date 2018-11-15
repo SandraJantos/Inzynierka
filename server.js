@@ -13,7 +13,7 @@ const channel = require('./routes/api/channel');
 
 const app = express(); //
 //const dev = app.get('env') !== 'production';
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 5000;
 
 //app.use(express.static(path.join(__dirname, 'client')));
 
@@ -47,22 +47,9 @@ app.use('/api/channel',channel);
 // });
 //load routers
 app.use(cors())
-
-  app.use(express.static("./client/build"))
-
-
-mongoose.Promise = global.Promise;
-// mongoose.connect(db, { useNewUrlParser: true })
-//     .then(() => console.log("success"))
-//     .catch(err => console.log(err))
-
-mongoose.connect(
-  process.env.MONGODB_URI || db
-  {
-    useMongoClient:true
-  }
-  )
-
+mongoose.connect(db, { useNewUrlParser: true })
+    .then(() => console.log("success"))
+    .catch(err => console.log(err))
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
