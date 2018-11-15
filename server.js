@@ -59,7 +59,6 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 
-app.listen(port);
 
 // const server = app.listen(port, function(err) {
 //   if (err) {  
@@ -72,12 +71,12 @@ app.listen(port);
 // const server = require('http').createServer(app);
 // const io = require('socket.io').listen(server);
 
-// const server = app.listen(port,  function(err) {
-//   if (err) {
-//     return;
-//   } 
-//   console.log('server listening on port: %s', port);
-// });
+const server = app.listen(port,  function(err) {
+  if (err) {
+    return;
+  } 
+  console.log('server listening on port: %s', port);
+});
 
 // const io = new SocketIo(server, {path: '/api/chat'})
 //const socketEvents = require('./socketEvents')(io);
