@@ -15,17 +15,16 @@ const app = express();
 
 
 //const dev = app.get('env') !== 'production';
-const port = 5000;
-//const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5000;
 
 //app.use(express.static(path.join(__dirname, 'client')));
 
 //set env vars
 const bodyParser = require('body-parser');
 
-//const db = process.env.MONGODB_URI;
+const db = process.env.MONGODB_URI;
 
-const db = require('./config/keys').mongoURI;
+//const db = require('./config/keys').mongoURI;
 let dbUrl = 'mongodb://superSam:superSam123@ds155299.mlab.com:55299/sam_db';
 const mongoose = require('mongoose');
 let loggedUsers = [];
@@ -61,7 +60,7 @@ app.get('*', (req, res) => {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(db)
+mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
     .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
@@ -138,3 +137,6 @@ const io = new SocketIo(server,{ path: '/api/chat'})
 //    }
 //  })
 // })
+
+
+    "mongoose": "^4.10.8",
