@@ -8,7 +8,7 @@ import moment from 'moment';
 class Home extends Component { 
   render() { 
     const {openChat,currentUser,match,books,...rest} = this.props; 
-    books.slice(0).sort((a,b)=>new Date(a.created) - new Date(b.created));
+    (books||[]).slice(0).sort((a,b)=>new Date(a.created) - new Date(b.created));
     return (
     	<Fragment >
     	<div className="container">

@@ -13,13 +13,7 @@ const channel = require('./routes/api/channel');
 
 const app = express(); 
 
-if (process.env.NODE_ENV === 'production'){
-app.use(express.static(path.join(__dirname, '/client/build')));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname+'/client/build/index.html'));
-});
-}
 //const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
 
@@ -54,7 +48,16 @@ app.use('/api/channel',channel);
 //   res.sendFile(path.join(__dirname+'/client/public/index.html'));
 // });
 //load routers
+
 app.use(cors())
+
+if (process.env.NODE_ENV === 'production'){
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
+}
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
