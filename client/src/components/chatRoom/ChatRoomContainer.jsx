@@ -30,13 +30,10 @@ class ChatRoomContainer extends Component {
 
 	}
 	logIn = () => {
-		let userId=this.props.location.pathname.split('/')[1]
-		let userName = this.props.users.find(el => el._id === userId)
-
-		console.log(userName);
+		const {user} = this.props;
 		let newMessage = {
 			text:this.state.text,
-			user:{id:userId,name:userName.name},
+			user:{id:user.id,name:user.name},
 			channelID:this.props.activeChannel.id,
 			time: new Date()
 		}
