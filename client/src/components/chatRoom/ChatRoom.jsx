@@ -7,8 +7,8 @@ import { withRouter } from 'react-router';
 class ChatRoom extends Component {
 
 	render() {
-	const {formData,onChange,action,chatRooms,messages,createChannel,channels,changeChannel,activeChannel} = this.props;
-	console.log(messages);
+	const {formData,onChange,action,usersConnected,chatRooms,messages,createChannel,channels,changeChannel,activeChannel} = this.props;
+	console.log(usersConnected);
 		return (
 		<div>
 			<div className="col-md-4">
@@ -34,6 +34,7 @@ class ChatRoom extends Component {
 				/>
 				<button onClick={()=>{action()}}>send</button>
 			</div>
+			{usersConnected.map(el => <div>{el.name}</div>)}
 		</div>
 		);
 	} 

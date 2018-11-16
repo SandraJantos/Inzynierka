@@ -7,6 +7,8 @@ import channelAction from 'store/actions/channelAction';
 import userAction from 'store/actions/userAction';
 import io from 'socket.io-client';
 import $ from 'jquery'; 
+import { values } from 'lodash'
+
 const socket = io('', { path: '/api/chat' });
 
 class ChatRoomContainer extends Component {
@@ -16,7 +18,9 @@ class ChatRoomContainer extends Component {
 			roomName:'',
 			text:'',
 			messages:[],
-			activeChannel:null 
+			activeChannel:null,
+		  usersConnected:[],
+
 		} 
 	};    
 
@@ -45,11 +49,11 @@ class ChatRoomContainer extends Component {
 	componentDidMount() {
 		this.props.getChannels();
 		this.props.getUsersList();
-
 		if ((this.props.user||{}).isAuthenticated === true) {
 			this.props.getCurrentUser();
 		}
 		socket.emit('chat mounted', this.props.user);
+		socket.emit('USER_CONNECTED', this.props.user);
 
 		this.props.getChannels()
 		socket.on('receive socket', socketID =>
@@ -63,8 +67,14 @@ class ChatRoomContainer extends Component {
 			this.props.getMessages(this.props.activeChannel.id)
 
 		})  
-
+	socket.on('USER_CONNECTED', (users)=>{
+			this.setState({ usersConnected: values(users) })
+		})
+		socket.on('USER_DISCONNECTED', (users)=>{
+			this.setState({ usersConnected: values(users) })			
+		})
 	}
+
 	changeChannel = (channel) => {
 		socket.emit('leave channel', this.props.activeChannel);
 		socket.emit('join channel', channel);
@@ -79,8 +89,9 @@ class ChatRoomContainer extends Component {
 	}
 	render() {
 		const {chatRooms,messages,channels} = this.props;
+		console.log(this.state.usersConnected);
 		return (
-			<ChatRoom channels={channels} activeChannel={this.state.activeChannel} changeChannel={this.changeChannel}
+			<ChatRoom usersConnected={this.state.usersConnected} channels={channels} activeChannel={this.state.activeChannel} changeChannel={this.changeChannel}
 			createChannel={this.createChannel} messages={this.props.messages} socket={socket} formData={this.state} chatRooms={chatRooms}
 			onChange={v=>this.setState(v)} action={this.logIn} />
 			);

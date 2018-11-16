@@ -88,25 +88,60 @@ const server = app.listen(port,  function(err) {
 
 // const io = new SocketIo(server, {path: '/api/chat'})
 //const socketEvents = require('./socketEvents')(io);
+let usersJoined = [];
+let connectedUsers = { }
+function addUser(userList, user){
+  let newList = Object.assign({}, userList)
+  newList[user.name] = user
+  return newList
+}
+
+function removeUser(userList, username){
+  let newList = Object.assign({}, userList)
+  delete newList[username]
+  return newList
+}
 
 const io = new SocketIo(server,{ path: '/api/chat'}) 
   io.on('connection', function(socket) {
    // socket.join('general');
- // socket.on('connectedUser', (users) =>{yyyy
+ // socket.on('connectedUser', (users) =>{
  //  console.log(users);
  //        socket.name = users;
  //        userss.push(socket.name);
  //        io.sockets.emit('connectedUser', userss);
  //    });
- console.log("fsfd");
+  socket.on('joinRoom', function(room,name) {
+socket.join(room);
+
+    });
+    socket.on('USER_CONNECTED', (user)=>{
+      console.log(user);
+    user.socketId = socket.id
+    connectedUsers = addUser(connectedUsers, user)
+    socket.user = user
+
+
+    io.emit('USER_CONNECTED', connectedUsers)
+    console.log(connectedUsers);
+
+  })
+    socket.on('disconnect', ()=>{
+    if("user" in socket){
+      connectedUsers = removeUser(connectedUsers, socket.user.name)
+
+      io.emit('USER_DISCONNECTED', connectedUsers)
+      console.log("Disconnect", connectedUsers);
+    }
+  })
     socket.on('chat mounted', function(user) {
       socket.emit('receive socket', socket.id)
     })
     socket.on('leave channel', function(channel) {
       socket.leave(channel)
     })
-    socket.on('join channel', function(channel) {
-      socket.join(channel.name)
+    socket.on('get users', function(users) {
+    io.sockets.clients('room')
     })
     socket.on('send message', function(msg) {
      io.sockets.emit('new message',msg);
@@ -124,7 +159,7 @@ const io = new SocketIo(server,{ path: '/api/chat'})
       socket.broadcast.to(socketID).emit('receive private channel', channel);
     })
   });
-   
+//    
 
 // io.on('connection', function(socket) {
 //  socket.on('new user', function(data,callback) {
@@ -137,5 +172,3 @@ const io = new SocketIo(server,{ path: '/api/chat'})
 //    }
 //  })
 // })
-
-

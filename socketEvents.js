@@ -7,6 +7,8 @@ exports = module.exports = function(io) {
  //        userss.push(socket.name);
  //        io.sockets.emit('connectedUser', userss);
  //    });
+
+
     socket.on('chat mounted', function(user) {
       socket.emit('receive socket', socket.id)
     })
