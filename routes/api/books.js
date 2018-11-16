@@ -11,13 +11,38 @@ const fs = require('fs');
 const GridFsStorage = require('multer-gridfs-storage');
 const key = keys.mongoURI;
 const crypto = require('crypto');
+const S3FS = require('s3fs');
+const multiparty = require('connect-multiparty');
+var multerS3 = require('multer-s3');
+const UPLOAD_PATH = path.resolve(__dirname, '../../public/uploads');
+// const upload = multer({
+//   dest: UPLOAD_PATH,
+//   limits: {fileSize: 1000000, files: 5}
+// })
 
-const UPLOAD_PATH = path.resolve(__dirname, '../../public/uploads')
+const AWS = require('aws-sdk');
+AWS.config.update({
+  accessKeyId:'AKIAIRHYK5SFAVK6B2PQ',
+  secretAccessKey:'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'
+
+});
+
+AWS.config.region = 'us-east-2';
+const s3 = new AWS.S3();
+
 const upload = multer({
-  dest: UPLOAD_PATH,
-  limits: {fileSize: 1000000, files: 5}
+  storage: multerS3({
+    s3: s3,
+    bucket: 'samimagesbucket',
+    metadata: function (req, file, cb) {
+      cb(null, {fieldName: file.fieldname});
+    },
+    key: function (req, file, cb) {
+      const filename = `${Date.now().toString()}-${file.originalname}`;
+      cb(null, filename)
+    }
+  })
 })
-
  
 const storage = new GridFsStorage({
   url: key,
@@ -39,7 +64,9 @@ const storage = new GridFsStorage({
   }
 });
 
-
+// router.post('/image/upload', upload.single('image'), function(req, res, next) {
+//   res.send('Successfully uploaded ' )
+// })
 router.post('/', passport.authenticate('jwt', {session:false}), upload.single('image'), (req,res) => {
   const newBook = {};
   newBook.user = req.user.id;

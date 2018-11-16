@@ -32,7 +32,15 @@ export const createBook = (r,date) => dispatch => {
   .then(() => dispatch(getBooksList()))
     .catch(err => dispatch(errorAction(err.response.data)))
 }
+export const addImage = (r,date) => dispatch => {
+  console.log(r);
+  let formData = new FormData();
+  formData.append('image', r.image);
 
+  axios.post('/api/books/image/upload/', formData, 'multipart/form-data')
+  .then(() => dispatch(getBooksList()))
+    .catch(err => dispatch(errorAction(err.response.data)))
+}
 export const getBooksList = () => dispatch => {
   axios.get('/api/books/')
   .then(e => dispatch(booksReceivedAction(e.data)))
@@ -52,5 +60,6 @@ export const getBook = (id) => dispatch => {
 export default {
  createBook,
  getBooksList,
- updateBookStatus
+ updateBookStatus,
+ addImage
 }   

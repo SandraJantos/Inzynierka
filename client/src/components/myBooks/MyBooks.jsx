@@ -6,7 +6,7 @@ class MyBooks extends Component {
 
 
 	render() {
-		const {formData,onChange,imageSelectedHandler,action,books} = this.props;
+		const {formData,onChange,imageSelectedHandler,action,books,sendImg} = this.props;
 		console.log(books);
 		return (
 			<div>
@@ -27,6 +27,8 @@ class MyBooks extends Component {
 						<input id="file-upload" type="file" name="image" onChange={imageSelectedHandler} />
 					</label>
 				</div>
+				<button onClick={sendImg}>create</button>
+
 				<button onClick={action}>create</button>
 					<div>
 					{books ? books.map(el => <div>
