@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import MapContainer from 'components/map/MapContainer';
 import { Link, Redirect } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import moment from 'moment';
@@ -19,7 +18,6 @@ class Home extends Component {
           <div>UŻYTKOWNIK:{(users||[]).find(e => e._id === el.user).name}</div>
     			</div>)}
     		</div>
-      		<MapContainer {...rest} />
     		}
       	</Fragment>
      );
