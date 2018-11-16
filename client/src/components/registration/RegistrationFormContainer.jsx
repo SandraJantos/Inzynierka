@@ -26,7 +26,6 @@ class RegistrationFormContainer extends Component {
 	}
 	register = () => {
 		const actionId =  Math.random();
-
 		this.props.registerAction(this.state,this.props.history,actionId);
 
 	}

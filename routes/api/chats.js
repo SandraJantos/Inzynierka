@@ -16,9 +16,6 @@ const Channel = require('../../models/Channel');
 
 module.exports = router;
 
-// export const r = (f) => dispatch => {
-//  axios.post
-// }
 router.get('/list', (req, res, next) => {
     Chat.find()
         .sort({ date: -1 })

@@ -19,7 +19,7 @@ class ChatRoomContainer extends Component {
 			text:'',
 			messages:[],
 			activeChannel:null,
-		  usersConnected:[],
+			usersConnected:[],
 
 		} 
 	};    
@@ -67,7 +67,7 @@ class ChatRoomContainer extends Component {
 			this.props.getMessages(this.props.activeChannel.id)
 
 		})  
-	socket.on('USER_CONNECTED', (users)=>{
+		socket.on('USER_CONNECTED', (users)=>{
 			this.setState({ usersConnected: values(users) })
 		})
 		socket.on('USER_DISCONNECTED', (users)=>{
@@ -80,9 +80,9 @@ class ChatRoomContainer extends Component {
 		socket.emit('join channel', channel);
 		this.setState(prevState => ({activeChannel:prevState.activeChannel===channel._id ? null : channel._id}))
 		this.props.changeChannel(channel)
-	 socket.emit('joinRoom', this.props.activeChannel.name, this.props.user._id);
+		socket.emit('joinRoom', this.props.activeChannel.name, this.props.user._id);
 		this.props.getMessages(channel._id)
-			socket.on('getClients', message => {
+		socket.on('getClients', message => {
 			console.log(message);
 
 		})  
@@ -106,8 +106,6 @@ function mapStateToProps (state,ownProps) {
 		channels:state.channels,
 		activeChannel:state.activeChannel,
 		users:state.users,
-
-
 	}
 }
 
@@ -124,9 +122,6 @@ function mapDispatchToProps(dispatch) {
 		changeChannel: (channel)=>dispatch(channelAction.changeChannel(channel)),
 		getMessages: (channelID) => dispatch(chatAction.getMessages(channelID)),
 		getUsersList: () => dispatch(userAction.getUsersList()),
-
-
-
 	} 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomContainer);

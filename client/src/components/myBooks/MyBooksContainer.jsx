@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import booksAction from 'store/actions/booksAction';
 import loginAction from 'store/actions/loginAction';
 
-
 class MyBooksContainer extends Component {
-
 	constructor (props) {
 		super(props)
 		this.state = {
@@ -28,10 +26,10 @@ class MyBooksContainer extends Component {
 	createBook = () => {
 		this.props.createBook(this.state, new Date())
 	}
-sendImg = () => {
+	sendImg = () => {
 		this.props.addImage(this.state)
 
-}
+	}
 	render() {
 		const {books} = this.props;
 		console.log(books);

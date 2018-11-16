@@ -25,12 +25,6 @@ export const addMessageAction = (messages) => {
     messages:messages.data
   };
 }
-// export const getMessage  = (messages)  => {
-//    return {
-//     type: MESSAGE_RECEIVED,
-//     messages:messages
-//   };
-// }  
 
 export const receiveSocket = (socketID) =>{
   console.log(socketID);

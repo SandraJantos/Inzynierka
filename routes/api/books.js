@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../../models/Book');
 const User = require('../../models/User');
-
 const keys = require('../../config/keys');
 const passport = require('passport');
 const path = require("path");
@@ -14,11 +13,6 @@ const crypto = require('crypto');
 const S3FS = require('s3fs');
 const multiparty = require('connect-multiparty');
 var multerS3 = require('multer-s3');
-const UPLOAD_PATH = path.resolve(__dirname, '../../public/uploads');
-// const upload = multer({
-//   dest: UPLOAD_PATH,
-//   limits: {fileSize: 1000000, files: 5}
-// })
 
 const AWS = require('aws-sdk');
 AWS.config.update({
@@ -44,29 +38,7 @@ const upload = multer({
   })
 })
  
-const storage = new GridFsStorage({
-  url: key,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = buf.toString('hex') + path.extname(file.originalname);
-        const fileInfo = {
-          filename: filename,
 
-        };
-        console.log(fileInfo);
-        resolve(fileInfo);
-      });
-    });
-  }
-});
-
-// router.post('/image/upload', upload.single('image'), function(req, res, next) {
-//   res.send('Successfully uploaded ' )
-// })
 router.post('/', passport.authenticate('jwt', {session:false}), upload.single('image'), (req,res) => {
   const newBook = {};
   newBook.user = req.user.id;
@@ -76,8 +48,6 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
   if (req.body.isbn) newBook.isbn = req.body.isbn;
   if (req.body.created) newBook.created = req.body.created;
   if (req.file) newBook.image = req.file;
-
-
   new Book(newBook).save().then(book => res.json({image:req.file,...book}));
   var id = newBook.user;
   User.findById( id, (err, data)=> {
@@ -120,7 +90,6 @@ router.get('/:id', (req, res, next) => {
 
   })
 })
-
 
 
 router.post(

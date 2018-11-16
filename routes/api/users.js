@@ -107,11 +107,8 @@ router.get('/current/:id', passport.authenticate('jwt', {session:false}), (req,r
 
 	})
     }) 
-
-
 })
+
+
 module.exports = router;
 
-// export const r = (f) => dispatch => {
-// 	axios.post
-// }

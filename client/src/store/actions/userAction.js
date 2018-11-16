@@ -1,8 +1,5 @@
 import axios from 'axios';
-
 export const USERS_LIST_RECEIVED = 'USERS_LIST_RECEIVED';
-
-
 
 export const usersListReceivedAction = (users) => {
   return {
@@ -10,8 +7,6 @@ export const usersListReceivedAction = (users) => {
     users:users
   };
 }
-
-
 
 export const getUsersList = () => dispatch => {
   axios.get('/api/users/usersList/')

@@ -5,7 +5,7 @@ import booksAction from 'store/actions/booksAction';
 
 
 class PlannerContainer extends Component {
-		constructor (props) {
+	constructor (props) {
 		super(props)
 		this.state = {
 			chatMsg:'',
@@ -15,15 +15,15 @@ class PlannerContainer extends Component {
 	componentDidMount(){
 		this.props.getBooksList();
 	}
-	  changed = (id,status) => {
-	 this.props.updateBookStatus(id,status)
-  }
-  render() {
-  	const {books} = this.props;
-    return (
-        <Planner changed={this.changed} books={books}/>
-    );
-  } 
+	changed = (id,status) => {
+		this.props.updateBookStatus(id,status)
+	}
+	render() {
+		const {books} = this.props;
+		return (
+			<Planner changed={this.changed} books={books}/>
+			);
+	} 
 }
 function mapStateToProps (state,ownProps) {
 	return {
@@ -32,13 +32,11 @@ function mapStateToProps (state,ownProps) {
 	}
 }
 
-
 function mapDispatchToProps(dispatch) {
 	return {
 		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
 		updateBookStatus: (id,status) => dispatch(booksAction.updateBookStatus(id,status)),
-	
+
 	} 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(PlannerContainer);
-     

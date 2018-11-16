@@ -6,7 +6,6 @@ class Profile extends Component {
 
     return (
       <div>
-
       {(user||{}).books ? (user||{}).books.map(el => <div>
         <div>title:{el.title}</div>
         <div>description:{el.description}</div>

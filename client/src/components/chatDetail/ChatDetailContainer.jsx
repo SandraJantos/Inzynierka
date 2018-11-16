@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import chatAction from 'store/actions/chatAction';
 
 class ChatDetailContainer extends Component {
-		constructor (props) {
+	constructor (props) {
 		super(props)
 		this.state = {
 			chatMsg:'',
@@ -15,12 +15,12 @@ class ChatDetailContainer extends Component {
 	sendMsg = () => {
 		this.props.sendMsg(this.state,this.props.chatId)
 	}
-  render() {
-    return (
-        <ChatDetail formData={this.state} 
-				onChange={v=>this.setState(v)} action={this.sendMsg} />
-    );
-  } 
+	render() {
+		return (
+			<ChatDetail formData={this.state} 
+			onChange={v=>this.setState(v)} action={this.sendMsg} />
+			);
+	} 
 }
 function mapStateToProps (state,ownProps) {
 	return {
@@ -30,9 +30,8 @@ function mapStateToProps (state,ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-	
+
 		sendMsg: (data,chatId) => dispatch(chatAction.sendMsg(data,chatId))
 	} 
 }
 export default connect(mapStateToProps, mapDispatchToProps)(ChatDetailContainer);
-     

@@ -8,11 +8,7 @@ class HomePage extends Component {
 	render() {
     const {match} = this.props;
 		return (
-			<Fragment>
-				<Link to={`/login`}>Login</Link>
-				<Link to={`registration`}>Register</Link>
-				<HomeContainer action={(this.props.location.state||{}).action} />
-			</Fragment>
+			<HomeContainer action={(this.props.location.state||{}).action} />
 		);
 	} 
 }

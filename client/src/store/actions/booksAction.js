@@ -26,40 +26,29 @@ export const createBook = (r,date) => dispatch => {
   formData.append('isbn', r.isbn);
   formData.append('image', r.image);
   formData.append('created', date);
-
-    console.log(formData);
   axios.post('/api/books/', formData, 'multipart/form-data')
   .then(() => dispatch(getBooksList()))
-    .catch(err => dispatch(errorAction(err.response.data)))
+  .catch(err => dispatch(errorAction(err.response.data)))
 }
-export const addImage = (r,date) => dispatch => {
-  console.log(r);
-  let formData = new FormData();
-  formData.append('image', r.image);
 
-  axios.post('/api/books/image/upload/', formData, 'multipart/form-data')
-  .then(() => dispatch(getBooksList()))
-    .catch(err => dispatch(errorAction(err.response.data)))
-}
 export const getBooksList = () => dispatch => {
   axios.get('/api/books/')
   .then(e => dispatch(booksReceivedAction(e.data)))
   .catch(err => console.log(err))
- }
- 
- export const updateBookStatus = (id,state) => dispatch => {
+}
+
+export const updateBookStatus = (id,state) => dispatch => {
   axios.post('/api/books/'+id,{state})
   .then(e => dispatch(getBooksList()))
   .catch(err => console.log(err))
- }
+}
 export const getBook = (id) => dispatch => {
   axios.get('/api/books/'+id+'/')
   .then(e => dispatch(bookReceivedAction(e.data)))
   .catch(err => console.log(err))
 }
 export default {
- createBook,
- getBooksList,
- updateBookStatus,
- addImage
+  createBook,
+  getBooksList,
+  updateBookStatus
 }   
