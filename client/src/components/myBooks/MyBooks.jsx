@@ -33,7 +33,7 @@ class MyBooks extends Component {
 						<div>title:{el.title}</div>
 						<div>description:{el.description}</div>
 
-						<img style={{width:'200px'}} src={`https://serene-bayou-60151.herokuapp.com/api/books/${(el.image||{}).filename}`}  />
+					
 						</div>
 						) : null}
 					</div>

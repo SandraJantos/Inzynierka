@@ -13,7 +13,6 @@ class Home extends Component {
     	<Fragment >
     	<div className="container">
     		{books.map(el => <div className="col-sm-4 block">
-				<img style={{width:'200px'}} src={`https://serene-bayou-60151.herokuapp.com/api/books/${(el.image||{}).filename}`}  />
     			<div>TYYTUŁ:{el.title}</div>
     			<div>DATA:{moment(el.created).format('DD.MM.YYYY HH:mm')}</div>
           <div>UŻYTKOWNIK:{(users||[]).find(e => e._id === el.user).name}</div>
