@@ -8,8 +8,9 @@ import ChatPage from './chat/ChatPage';
 import ChatDetailPage from './chatDetail/ChatDetailPage';
 import PlannerPage from './planner/PlannerPage';
 import MapPage from '../common/map/MapPage';
+import BookPage from '../common/book/BookPage';
 
-
+  
 class UserIndex extends Component { 
   render() {
     const {path} = this.props.match;
@@ -24,6 +25,8 @@ class UserIndex extends Component {
           <Route exact path="/profile/" component={ProfilePage} />
           <Route exact path="/chatDetail/" component={ChatDetailPage} />
           <Route exact path="/map/" component={MapPage} />
+          <Route exact path="/book/:name" component={BookPage} />
+
         </Switch>
       </UserPage>
       </div>
