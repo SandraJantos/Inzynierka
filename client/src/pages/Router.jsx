@@ -8,7 +8,7 @@ import UserIndex from './user/UserIndex';
 class Router extends Component { 
   render() {
     return (
-      <BrowserRouter basename='/build'>
+      <BrowserRouter>
         <Switch>
           <Route path="/registration/" component={RegistrationPage} />
           <Route path="/login/" component={LoginPage} />

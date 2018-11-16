@@ -36,7 +36,6 @@ class ChatRoomContainer extends Component {
 			channelID:this.props.activeChannel.id,
 			time: new Date()
 		}
-		console.log(newMessage);
 		socket.emit('send message',newMessage);
 
 		this.props.sendMsg(newMessage)
@@ -59,18 +58,24 @@ class ChatRoomContainer extends Component {
 		socket.on('new channel', channel =>{
 			console.log(channel);
 			this.props.getChannels()
-		} );
+		} ); 
 		socket.on('new message', message => {
 			this.props.getMessages(this.props.activeChannel.id)
 
 		})  
+
 	}
 	changeChannel = (channel) => {
 		socket.emit('leave channel', this.props.activeChannel);
 		socket.emit('join channel', channel);
 		this.setState(prevState => ({activeChannel:prevState.activeChannel===channel._id ? null : channel._id}))
 		this.props.changeChannel(channel)
+	 socket.emit('joinRoom', this.props.activeChannel.name, this.props.user._id);
 		this.props.getMessages(channel._id)
+			socket.on('getClients', message => {
+			console.log(message);
+
+		})  
 	}
 	render() {
 		const {chatRooms,messages,channels} = this.props;
