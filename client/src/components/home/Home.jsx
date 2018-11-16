@@ -13,6 +13,7 @@ class Home extends Component {
     	<Fragment >
     	<div className="container">
     		{books.map(el => <div className="col-sm-4 block">
+				<img style={{width:'200px'}} src={`https://s3.amazonaws.com/samimagesbucket/${(el.image||{}).key}`}  />
     			<div>TYYTUŁ:{el.title}</div>
     			<div>DATA:{moment(el.created).format('DD.MM.YYYY HH:mm')}</div>
           <div>UŻYTKOWNIK:{(users||[]).find(e => e._id === el.user).name}</div>

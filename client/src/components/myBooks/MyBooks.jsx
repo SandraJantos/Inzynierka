@@ -6,7 +6,7 @@ class MyBooks extends Component {
 
 
 	render() {
-		const {formData,onChange,imageSelectedHandler,action,books,sendImg} = this.props;
+		const {formData,onChange,imageSelectedHandler,action,books} = this.props;
 		console.log(books);
 		return (
 			<div>
@@ -27,13 +27,12 @@ class MyBooks extends Component {
 						<input id="file-upload" type="file" name="image" onChange={imageSelectedHandler} />
 					</label>
 				</div>
-				<button onClick={sendImg}>create</button>
-
 				<button onClick={action}>create</button>
 					<div>
 					{books ? books.map(el => <div>
 						<div>title:{el.title}</div>
 						<div>description:{el.description}</div>
+						<img style={{width:'200px'}} src={`https://s3.amazonaws.com/samimagesbucket/${(el.image||{}).key}`}  />
 
 					
 						</div>
