@@ -17,7 +17,6 @@ class HomeContainer extends Component {
 		this.state = {
 			action:null,
 			redirect:false,
-			displayInfo:null
 		} 
 	};    
 
@@ -27,14 +26,8 @@ class HomeContainer extends Component {
 
 	}
 
-	click = (i) => {
-		this.setState(prevState => ({displayInfo:prevState.displayInfo === i ? null : i}))
-	}
-	redirectToProfile = (user,userId) => {
-		this.props.history.push( {pathname: `profile/${user}`,
-			state: { id: userId }});
 
-	}
+
 	componentDidUpdate(prevProps) {
 		if (this.props.user !== prevProps.user && this.props.user!==null) {
 			//socket.emit('connectedUser',(this.props.user.user||{}).id);
@@ -55,11 +48,9 @@ class HomeContainer extends Component {
 		return (
 			<Fragment>
 			<Home books={books} users={users} currentUser={this.props.user.user} openChat={this.openChat}
-			locations={(users||[]).length>0 ? 
-				(users||[]).filter(e =>e.location!==undefined).map((e,index) => (e.location.slice(1, -1).split(',')).concat(e))
-				: []} logout={this.props.logout}
-				click={this.click} match={match} redirectToProfile={this.redirectToProfile}
-				displayInfo={this.state.displayInfo}  />
+			 logout={this.props.logout}
+				click={this.click} match={match} 
+				  />
 				</Fragment>
 				);
 	} 

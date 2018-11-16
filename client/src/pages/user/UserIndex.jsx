@@ -7,25 +7,23 @@ import ProfilePage from '../common/profile/ProfilePage';
 import ChatPage from './chat/ChatPage';
 import ChatDetailPage from './chatDetail/ChatDetailPage';
 import PlannerPage from './planner/PlannerPage';
-
+import MapPage from '../common/map/MapPage';
 
 
 class UserIndex extends Component { 
   render() {
     const {path} = this.props.match;
-  
-    return (
+      return (
       <div> 
       <UserPage> 
         <Switch>
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/:user" component={HomePage} />
-          <Route exact path="/:user/myBooks" component={MyBooksPage} />
-          <Route exact path="/:user/chat" component={ChatPage} />
-         <Route exact path="/:user/planner" component={PlannerPage} />
-          <Route exact path="/profile/:user" component={ProfilePage} />
-          <Route exact path={`/chatDetail/:chatListId`} component={ChatDetailPage} />
-
+          <Route exact path="/myBooks/" component={MyBooksPage} />
+          <Route exact path="/chat/" component={ChatPage} />
+          <Route exact path="/planner/" component={PlannerPage} />
+          <Route exact path="/profile/" component={ProfilePage} />
+          <Route exact path="/chatDetail/" component={ChatDetailPage} />
+          <Route exact path="/map/" component={MapPage} />
         </Switch>
       </UserPage>
       </div>

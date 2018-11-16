@@ -26,19 +26,21 @@ class TopBar extends Component {
             {Object.keys((currentUser||{})).length > 0 ?
             <ul className="navLinks nav navbar-nav">
               <li>name: {(currentUser||{}).name}</li>
-              <Link to={`${match.path}${(currentUser||{})._id}`}>HOME</Link>
-              <Link to={`${match.path}${(currentUser||{})._id}/myBooks`}>my books</Link>
-              <Link to={`${match.path}${(currentUser||{})._id}/chat`}>chat</Link>
-              <Link to={`${match.path}${(currentUser||{})._id}/planner`}>planner</Link>
-  
-              <li style={{cursor:'pointer'}} onClick={this.props.logout}>
+              <Link to={`/`}>HOME</Link>
+              <Link to={`${match.path}myBooks`}>my books</Link>
+              <Link to={`${match.path}chat`}>chat</Link>
+              <Link to={`${match.path}planner`}>planner</Link>
+              <Link to={`${match.path}map`}>map</Link>
+                <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut
               </li> 
             </ul>
             :
             <ul className="nav navbar-nav button-holder">
-              <Link  to={`${match.path}login`}>Login</Link>
+              <Link to={`login`}>Login</Link>
               <Link to={`registration`}>Register</Link>
+              <Link to={`map`}>map</Link>
+
             </ul>}
           </div>
         </div>

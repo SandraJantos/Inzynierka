@@ -12,7 +12,6 @@ class TopBarContainer extends Component {
   } 
 
   render() {
-    console.log(this.props.location.pathname.split('/')[1]);
     return (
       <TopBar currentUser={this.props.user} 
       logout={()=>this.props.logout(this.props.history)}/>
@@ -22,7 +21,7 @@ class TopBarContainer extends Component {
 
 function mapStateToProps(state,ownProps) {
   return {
-    user: (state.users||[]).find(el => el._id === (ownProps.location.pathname.split('/')[1]))
+    user: state.user
   };
 }
 

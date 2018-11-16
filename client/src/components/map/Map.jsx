@@ -51,12 +51,13 @@ const Map = withScriptjs(withGoogleMap((props) =>{
     }}
     />
     </SearchBox>
-    {props.locations!==undefined ? props.locations.map((e,i) => <Marker
+    {props.locations!==undefined && props.mainMap ? props.locations.map((e,i) => <Marker
       onClick={()=>props.click(i)}
       position={{lat: Number(props.locations[i][0]), lng:  Number(props.locations[i][1])}} 
       >
       {props.displayInfo!==undefined && props.displayInfo===i ? <InfoWindow >
-        <span style={{cursor:'pointer'}} onClick={()=>props.redirectToProfile(props.locations[i][2].name,props.locations[i][2]._id)}>{props.locations[i][2].name}</span></InfoWindow> : null}
+        <span style={{cursor:'pointer'}} 
+        onClick={props.mainMap ? ()=>props.redirectToProfile(props.locations[i][2].name,props.locations[i][2]._id) : {}}>{props.locations[i][2].name}</span></InfoWindow> : null}
         </Marker> ) : <Marker
         ref={props.onMarkerMounted} onPositionChanged={props.onPositionChanged}
         position={props.center} 

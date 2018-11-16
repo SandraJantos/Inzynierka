@@ -41,10 +41,7 @@ export const login = (r,history) => (dispatch) => {
 
     const decoded = jwt_decode(token);
     dispatch(setCurrentUser(decoded));
-    history.push({
-    pathname: '/'+decoded.id,
-    state: { user: decoded.id }
-    }) 
+    history.push('/') 
   })
   .catch(err => dispatch(errorAction(err)))
 }   
