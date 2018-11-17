@@ -92,23 +92,20 @@ router.get('/usersList', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no users' }));
 });
 
-router.get('/current/:id', passport.authenticate('jwt', {session:false}), (req,res) => {
-	 User.findOne({'_id': req.params.id}).then(m => {
-      if (!m) {
-      	console.log("no user");
-      }
 
-     	res.json({
+router.get(
+  '/current',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.json({
 		id: req.user.id,
 		name: req.user.name,
 		surName:req.user.surName,
 		email : req.user.email,
 		userType: req.user.userType
-
-	})
-    }) 
-})
-
+    });
+  }
+);
 
 module.exports = router;
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Planner from './Planner';
 import { connect } from 'react-redux';
 import booksAction from 'store/actions/booksAction';
-
+import loginAction from 'store/actions/loginAction';
 
 class PlannerContainer extends Component {
 	constructor (props) {
@@ -27,14 +27,14 @@ class PlannerContainer extends Component {
 }
 function mapStateToProps (state,ownProps) {
 	return {
-		books:state.books.filter(e => e.user === (ownProps.location.pathname.split('/')[1])),
-
+		books:state.books.filter(e => e.user === state.user.id),
+		user:state.user
 	}
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
+		getBooksList: () => dispatch(booksAction.getBooksList()),
 		updateBookStatus: (id,status) => dispatch(booksAction.updateBookStatus(id,status)),
 
 	} 

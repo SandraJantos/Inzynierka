@@ -8,7 +8,8 @@ import userAction from 'store/actions/userAction';
 class TopBarContainer extends Component {
 
   componentDidMount(){
-   this.props.getUsersList()
+   this.props.getUsersList();
+   this.props.getCurrentUser();
   } 
 
   render() {

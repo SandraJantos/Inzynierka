@@ -46,9 +46,9 @@ export const login = (r,history) => (dispatch) => {
   .catch(err => dispatch(errorAction(err)))
 }   
 
-export const getCurrentUser  = (id) => dispatch => {
-  axios.get('/api/users/current/'+id)
-  .then(e => dispatch(setCurrentUser(e)))
+export const getCurrentUser  = () => dispatch => {
+  axios.get('/api/users/current/')
+  .then(() => dispatch(setCurrentUser()))
   .catch(err => console.log(err))
 }
 export default {

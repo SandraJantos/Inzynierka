@@ -28,6 +28,14 @@ const BookSchema = new Schema({
 	},
 	created:{
 		type: Date 
+	},
+	avaiableState: {
+		type:String,
+		default:'free'
+	},
+	hidden: {
+		type: Boolean,
+		default: false
 	}
 }); 
   
