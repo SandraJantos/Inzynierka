@@ -53,7 +53,7 @@ export const updateBookReservationStatus = (id,state) => dispatch => {
 export const addReview = (id,rate,text, user) => dispatch => {
   console.log(id,rate,text, user);
   axios.post('/api/books/review/'+id,{rate,text,user})
-  .then(e => dispatch(getBook(id)))
+  .then(e => dispatch(getBooksList()))
   .catch(err => console.log(err))
 }
 
