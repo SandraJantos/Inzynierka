@@ -47,9 +47,8 @@ export const login = (r,history) => (dispatch) => {
 }   
 
 export const getCurrentUser  = () => dispatch => {
-  axios.get('/api/users/current/')
-  .then(() => dispatch(setCurrentUser()))
-  .catch(err => console.log(err))
+  
+ dispatch(setCurrentUser(jwt_decode(localStorage.getItem('jwtToken', 'token'))))
 }
 export default {
   logout,

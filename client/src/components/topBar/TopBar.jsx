@@ -31,15 +31,17 @@ class TopBar extends Component {
               <Link to={`${match.path}chat`}>chat</Link>
               <Link to={`${match.path}planner`}>planner</Link>
               <Link to={`${match.path}map`}>map</Link>
+              <Link to={`${match.path}reservations`}>reservations</Link>
+
                 <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut
               </li> 
             </ul>
             :
             <ul className="nav navbar-nav button-holder">
-              <Link to={`login`}>Login</Link>
-              <Link to={`registration`}>Register</Link>
-              <Link to={`map`}>map</Link>
+              <Link to={`/login`}>Login</Link>
+              <Link to={`/registration`}>Register</Link>
+              <Link to={`/map`}>map</Link>
 
             </ul>}
           </div>

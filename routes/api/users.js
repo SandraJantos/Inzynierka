@@ -93,19 +93,19 @@ router.get('/usersList', (req, res) => {
 });
 
 
-router.get(
-  '/current',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    res.json({
-		id: req.user.id,
-		name: req.user.name,
-		surName:req.user.surName,
-		email : req.user.email,
-		userType: req.user.userType
-    });
-  }
-);
+// router.get( 
+//   '/current',
+//   passport.authenticate('jwt', { session: false }),
+//   (req, res) => {
+//     res.json({
+// 		id: req.user.id,
+// 		name: req.user.name,
+// 		surName:req.user.surName,
+// 		email : req.user.email,
+// 		userType: req.user.userType
+//     });
+//   } 
+// );
 
 module.exports = router;
 

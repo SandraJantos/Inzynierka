@@ -79,7 +79,7 @@ router.get('/messages/:channelID', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no users' }));
 });
 
-
+ 
 router.post('/addMsg/:id', (req, res, next) => {
     const chatId = req.params.id;
     let newMsg = new ChatDetail({

@@ -16,8 +16,8 @@ class LoginForm extends Component {
 					{name:'password', path:'password', type:'password'},
 					]} 
 				/>
-				<div onClick={()=>onChange({email:'qq@q.pl', password:'qq'})}>qq</div>
-				<div onClick={()=>onChange({email:'w@w.pl', password:'ww'})}>ww</div>	
+				<div onClick={()=>onChange({email:'user1@user1.pl', password:'user1'})}>user1</div>
+				<div onClick={()=>onChange({email:'user2@user2.pl', password:'user2'})}>user2</div>	
 				<button onClick={()=>{action()}}> {'register'} </button>
 			</div>
 		</div> 

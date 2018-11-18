@@ -9,7 +9,6 @@ class TopBarContainer extends Component {
 
   componentDidMount(){
    this.props.getUsersList();
-   this.props.getCurrentUser();
   } 
 
   render() {

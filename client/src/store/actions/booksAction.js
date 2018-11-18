@@ -17,7 +17,7 @@ export const bookReceivedAction = (book) => {
     book
   }; 
 }
-export const createBook = (r,date) => dispatch => {
+export const createBook = (r,date,user) => dispatch => {
   console.log(r);
   let formData = new FormData();
   formData.append('title', r.title);
@@ -26,6 +26,8 @@ export const createBook = (r,date) => dispatch => {
   formData.append('isbn', r.isbn);
   formData.append('image', r.image);
   formData.append('created', date);
+  formData.append('user', user);
+
   axios.post('/api/books/', formData, 'multipart/form-data')
   .then(() => dispatch(getBooksList()))
   .catch(err => dispatch(errorAction(err.response.data)))
@@ -42,13 +44,25 @@ export const updateBookStatus = (id,state) => dispatch => {
   .then(e => dispatch(getBooksList()))
   .catch(err => console.log(err))
 }
+export const updateBookReservationStatus = (id,state) => dispatch => {
+  axios.post('/api/books/reserved/'+id,{reservationState:state})
+  .then(e => dispatch(getBooksList()))
+  .catch(err => console.log(err))
+}
 export const getBook = (id) => dispatch => {
   axios.get('/api/books/'+id+'/')
   .then(e => dispatch(bookReceivedAction(e.data)))
   .catch(err => console.log(err))
 }
+export const reserveBook = (id,state, userId,date) => dispatch => {
+  axios.post('/api/books/reservationAction/'+id+'/',{'state': state, 'reservedBy':userId,date})
+  .then(e => dispatch(getBooksList()))
+  .catch(err => console.log(err))
+}
 export default {
   createBook,
   getBooksList,
-  updateBookStatus
-}   
+  updateBookStatus,
+  reserveBook,
+  updateBookReservationStatus
+}    

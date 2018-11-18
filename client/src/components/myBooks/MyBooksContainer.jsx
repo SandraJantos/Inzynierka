@@ -12,7 +12,7 @@ class MyBooksContainer extends Component {
 			author:'',
 			description:'',
 			isbn:'',
-			image:''
+			image:'',
 
 		} 
 	};     
@@ -24,7 +24,7 @@ class MyBooksContainer extends Component {
 		this.setState({image:event.target.files[0]})
 	}
 	createBook = () => {
-		this.props.createBook(this.state, new Date())
+		this.props.createBook(this.state, new Date(),(this.props.user||{}).id)
 	}
 	sendImg = () => {
 		this.props.addImage(this.state)
@@ -54,7 +54,7 @@ function mapStateToProps (state,ownProps) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		createBook: (r,date) => dispatch(booksAction.createBook(r,date)),
+		createBook: (r,date,user) => dispatch(booksAction.createBook(r,date,user)),
 		getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
 		getCurrentUser: (r) => dispatch(loginAction.getCurrentUser(r)),
 		addImage: (r) => dispatch(booksAction.addImage(r)),

@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
+import booksAction from 'store/actions/booksAction';
 
 class ProfileContainer extends Component {
-
+  componentDidMount(){
+    this.props.getBooksList();
+  }
   render() {
-  	const {user} = this.props;
-  	console.log(user);
+  	const {books, ...rest} = this.props;
     return (
-        <Profile user={user} />
+        <Profile books={books} {...rest}/>
     );
   } 
-}
+} 
 
 
 function mapStateToProps (state,ownProps) {
 	return {
-		user:state.users.find(e => e._id === ownProps.userId),
+    books: state.books.filter(e => e.user === ownProps.userId)
 	}
 }
 
@@ -24,6 +26,7 @@ function mapStateToProps (state,ownProps) {
 function mapDispatchToProps(dispatch) {
 	return {
 	
+    getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
 
 
 	} 

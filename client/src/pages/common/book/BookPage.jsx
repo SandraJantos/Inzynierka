@@ -5,7 +5,8 @@ class BookPage extends Component {
 
   render() {
     return (
-        <BookContainer bookId={this.props.location.state.bookId} />
+        <BookContainer reservationId={(this.props.location.state||{}).reservationId} 
+        bookId={(this.props.location.state||{}).bookId} />
     );
   } 
 }

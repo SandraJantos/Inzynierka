@@ -11,4 +11,4 @@ class RegistrationPage extends Component {
 }
 
 export default RegistrationPage;
-    
+     

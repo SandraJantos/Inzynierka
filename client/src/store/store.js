@@ -17,6 +17,7 @@ import socketIdReducer from './reducers/socketIdReducer';
 import channelReducer from './reducers/channelReducer';
 import activeChannelReducer from './reducers/activeChannelReducer';
 import tokenReducer from './reducers/tokenReducer';
+import reservationsReducer from './reducers/reservationsReducer';
 
 const stackReducers = (...reducers) => {
   return (state=[], action) => {
@@ -46,7 +47,8 @@ export const initialState = {
   message:{},
   socketID:null,
   channels:[],
-  activeChannel:{}
+  activeChannel:{},
+  reservations:[]
 }
 
 export const store = createStore(
@@ -65,7 +67,8 @@ export const store = createStore(
       socketID: socketIdReducer,
       channels:channelReducer,
       activeChannel:activeChannelReducer,
-      token:tokenReducer
+      token:tokenReducer,
+      reservations:reservationsReducer
 
 
     }),

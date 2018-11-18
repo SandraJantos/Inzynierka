@@ -9,10 +9,12 @@ const users = require('./routes/api/users');
 const books = require('./routes/api/books');
 const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
+const reservations = require('./routes/api/reservations');
+
 const app = express(); 
 
 //const dev = app.get('env') !== 'production';
-const port = process.env.PORT || 5000;
+//const port = 5000;
 
 const bodyParser = require('body-parser');
 
@@ -32,6 +34,7 @@ app.use('/api/users',users);
 app.use('/api/books',books);
 app.use('/api/chats',chats);
 app.use('/api/channel',channel);
+app.use('/api/reservations',reservations);
 
 
 if (process.env.NODE_ENV === 'production'){
@@ -50,11 +53,11 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 
-const server = app.listen(port,  function(err) {
+const server = app.listen(5000,  function(err) {
   if (err) {
     return;
   } 
-  console.log('server listening on port: %s', port);
+  console.log('server listening on port: %s', 5000);
 });
 
 let usersJoined = [];

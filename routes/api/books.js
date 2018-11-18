@@ -39,9 +39,10 @@ const upload = multer({
 })
  
 
-router.post('/', passport.authenticate('jwt', {session:false}), upload.single('image'), (req,res) => {
+router.post('/', upload.single('image'), (req,res) => {
+  console.log(req.body);
   const newBook = {};
-  newBook.user = req.user.id;
+  newBook.user = req.body.user;
   if (req.body.title) newBook.title = req.body.title;
   if (req.body.author) newBook.author = req.body.author;
   if (req.body.description) newBook.description = req.body.description;
@@ -49,26 +50,7 @@ router.post('/', passport.authenticate('jwt', {session:false}), upload.single('i
   if (req.body.created) newBook.created = req.body.created;
   if (req.file) newBook.image = req.file;
   new Book(newBook).save().then(book => res.json({image:req.file,...book}));
-  var id = newBook.user;
-  User.findById( id, (err, data)=> {
-    console.log(data,"ddd");
-    if (err) {
-      return res.status(500).json({
-        ok: false,
-        errors: err
-      });
-    }
 
-    if (!data) {
-      return res.status(400).json({
-        ok: false,
-        errors: { message: 'No existe un data con ese ID' }
-      });
-    }
-
-    data.books.push(newBook);
-    data.save();
-  })
 })
 
 router.get('/', (req, res) => {
@@ -95,17 +77,54 @@ router.get('/:id', (req, res, next) => {
 router.post(
   '/:id',
   (req, res) => {
-    Book.findOne({ _id: req.params.id }).then(profile => {
-      if (profile) {
+    Book.findOne({ _id: req.params.id }).then(book => {
+      if (book) {
         Book.update(
           { _id: req.params.id },
           { $set: {state:req.body.state}}
-        ).then(profile => res.json(profile));
+        ).then(book => res.json(book));
       } else {
         console.log("sd");
       }
     })
   }
 );
+
+router.post(
+  '/reserved/:id',
+  (req, res) => {
+    Book.findOne({ _id: req.params.id }).then(book => {
+      if (book) {
+        Book.update(
+          { _id: req.params.id },
+          { $set: {reservationState:req.body.reservationState}}
+        ).then(book => res.json(book));
+      } else {
+        console.log("sd");
+      }
+    })
+  }
+);
+
+router.post(
+  '/reservationAction/:id',
+  (req, res) => {
+    console.log(req.body);
+    Book.findOne({ _id: req.params.id }).then(book => {
+      if (book) {
+        Book.update(
+          { _id: req.params.id },
+          { $set: {reservation:{
+            'state':req.body.state,
+            'reservedBy':req.body.reservedBy,
+            'date':req.body.date,
+          }}}
+        ).then(book => res.json(book));
+      } else {
+        console.log("sd");
+      }
+    }) 
+  }
+); 
 
 module.exports = router;

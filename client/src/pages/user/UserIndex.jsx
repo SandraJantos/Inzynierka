@@ -9,6 +9,7 @@ import ChatDetailPage from './chatDetail/ChatDetailPage';
 import PlannerPage from './planner/PlannerPage';
 import MapPage from '../common/map/MapPage';
 import BookPage from '../common/book/BookPage';
+import ReservationsPage from './reservations/ReservationsPage';
 
   
 class UserIndex extends Component { 
@@ -22,17 +23,18 @@ class UserIndex extends Component {
           <Route exact path="/myBooks/" component={MyBooksPage} />
           <Route exact path="/chat/" component={ChatPage} />
           <Route exact path="/planner/" component={PlannerPage} />
-          <Route exact path="/profile/" component={ProfilePage} />
+          <Route exact path="/profile/:name" component={ProfilePage} />
           <Route exact path="/chatDetail/" component={ChatDetailPage} />
           <Route exact path="/map/" component={MapPage} />
           <Route exact path="/book/:name" component={BookPage} />
+          <Route exact path="/reservations" component={ReservationsPage} />
 
         </Switch>
       </UserPage>
       </div>
     );
   } 
-}
+} 
 
 export default UserIndex;
    

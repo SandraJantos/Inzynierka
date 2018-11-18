@@ -13,7 +13,6 @@ const http = require('http').Server(express);
 const io = require('socket.io')(http);
 const Message = require('../../models/Message');
 
-module.exports = router;
 
   router.post('/new_channel', function(req, res) {
     console.log(req);
@@ -43,3 +42,5 @@ module.exports = router;
     })
     .catch(err => res.status(404).json({ profile: 'There are no channels' }));
 });
+
+module.exports = router;

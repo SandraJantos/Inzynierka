@@ -5,7 +5,8 @@ class ProfilePage extends Component {
 
   render() {
     return (
-        <ProfileContainer userId={(this.props.location.state||{}).id} />
+        <ProfileContainer userId={(this.props.location.state||{}).id}
+        reservationId={(this.props.location.state||{}).reservationId} />
     );
   } 
 }

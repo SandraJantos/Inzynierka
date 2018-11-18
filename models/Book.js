@@ -24,19 +24,24 @@ const BookSchema = new Schema({
 	},
 	state:{
 		type:String,
-    	default: 'unread'
+		default: 'unread'
 	},
 	created:{
-		type: Date 
+		type: Date,
+		default: Date.now
 	},
-	avaiableState: {
-		type:String,
-		default:'free'
+	reservationState: {
+			type:String,
+			default:'0'
 	},
 	hidden: {
 		type: Boolean,
 		default: false
 	}
 }); 
-  
+
 module.exports = Book = mongoose.model('books',BookSchema);
+
+//0-free
+//1-waiting
+//2-reseved
