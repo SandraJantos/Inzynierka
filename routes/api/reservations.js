@@ -23,6 +23,7 @@ router.post('/newReservation',(req,res) => {
 		res.json(data);
 	});
 }); 
+
 router.post(
   '/:id',
   (req, res) => {

@@ -95,20 +95,6 @@ router.post('/addMsg/:id', (req, res, next) => {
             });
         }
         else {
-
-            // res.json ({success: true, msg: 'Successfully Send a msg'});
-            // io.on('connection', function (socket) {
-            //     socket.on('getMsgBy', function(data) {
-            //                               console.log("lslslsl",chatMsgs);
-
-            //         socket.emit('msgData', {msgBy: data});
-            //     });
-
-            //     socket.on('msgToAll', function(data) {
-            //         //Send message to everyone
-            //         io.sockets.emit('newmsg', data);
-            //     });
-            // });
             io.emit('message', req.body);
         }
     });

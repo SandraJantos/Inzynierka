@@ -17,6 +17,7 @@ class HomeContainer extends Component {
 		this.state = {
 			action:null,
 			redirect:false,
+			reservedBooks:null
 		} 
 	};    
 
@@ -28,10 +29,12 @@ class HomeContainer extends Component {
 
 
 
-	componentDidUpdate(prevProps) {
-		if (this.props.user !== prevProps.user && this.props.user!==null) {
-			//socket.emit('connectedUser',(this.props.user.user||{}).id);
-
+	filter = (books) => {
+		if (this.state.reservedBooks===true) {
+			return this.props.books.filter(e => e.reservationState!=='0')
+		}
+		else{
+			return this.props.books.filter(e => e.reservationState==='0')
 		}
 
 	}
@@ -47,8 +50,8 @@ class HomeContainer extends Component {
 		const {users,match,books} = this.props; 
 		return (
 			<Fragment>
-			<Home books={books} users={users} currentUser={this.props.user.user} openChat={this.openChat}
-			 logout={this.props.logout}
+			<Home formData={this.state} books={this.filter(books)} users={users} currentUser={this.props.user.user} openChat={this.openChat}
+			 logout={this.props.logout} onChange={v=>this.setState(v)}
 				click={this.click} match={match} 
 				  />
 				</Fragment>

@@ -49,6 +49,14 @@ export const updateBookReservationStatus = (id,state) => dispatch => {
   .then(e => dispatch(getBooksList()))
   .catch(err => console.log(err))
 }
+
+export const addReview = (id,rate,text, user) => dispatch => {
+  console.log(id,rate,text, user);
+  axios.post('/api/books/review/'+id,{rate,text,user})
+  .then(e => dispatch(getBook(id)))
+  .catch(err => console.log(err))
+}
+
 export const getBook = (id) => dispatch => {
   axios.get('/api/books/'+id+'/')
   .then(e => dispatch(bookReceivedAction(e.data)))
@@ -64,5 +72,6 @@ export default {
   getBooksList,
   updateBookStatus,
   reserveBook,
-  updateBookReservationStatus
+  updateBookReservationStatus,
+  addReview
 }    

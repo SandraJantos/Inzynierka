@@ -3,6 +3,8 @@ import { withRouter } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import StarRatings from 'react-star-ratings';
+import Form from 'components/common/form/Form';  
 
 
 
@@ -12,6 +14,7 @@ class Book extends Component {
 		this.state = {
 			action:null,
 			redirect:false,
+			rating:0
 		} 
 	};    
 	checkReservationState = (state) => {
@@ -24,10 +27,15 @@ class Book extends Component {
 		else return <span>Reserved</span>
 	}
 
-
+  changeRating = ( newRating, name ) => {
+      this.setState({
+        rating: newRating
+      });
+    }
+ 
 	render() { 
-		const {book,users,makeReservation,user,exchangeBook,ifBookReserved,reservations} = this.props; 
-		console.log(Object.keys(reservations||{}),book);
+		const {addReview,formData, onChange, book,users,makeReservation,user,exchangeBook,ifBookReserved,reservations} = this.props; 
+		console.log(this.state.rating);
 	
 		return (
 			<div>
@@ -44,8 +52,27 @@ class Book extends Component {
              </div> : (book.reservationState==='0' && book.user !== user.id 
              	?  <button onClick={()=>makeReservation(book.user,book._id)}>Rezerwuj</button> : null)}
              </div>
+			<Form
+				formData={formData} 
+				onChange={onChange}  
+				schema={[
+				{name:'text', path:'text',type:'textarea'},
+				{name:'text', path:'userName'},
+
+				]} 
+			/>
+			<StarRatings
+				rating={this.state.rating}
+				starRatedColor='rgb(255, 235, 59)'
+				changeRating={this.changeRating}
+				numberOfStars={6}
+				name='rating'
+				starDimension='20px'
+				starHoverColor='rgb(255, 235, 59)'
+			/>
+			<button onClick={()=>{addReview(book._id,this.state.rating)}}>dodaj</button>
 			</div>
- 
+
 		);
 	}  
 }

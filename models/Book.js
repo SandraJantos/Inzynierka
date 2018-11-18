@@ -37,7 +37,23 @@ const BookSchema = new Schema({
 	hidden: {
 		type: Boolean,
 		default: false
-	}
+	},
+	reviews:  [
+    {
+      user: {
+        // type: Schema.Types.ObjectId,
+        // ref: 'users'
+			type:String,
+      },
+      text: {
+        type: String,
+        required: true
+      },
+      rate: {
+        type: String
+      },
+    }
+  ]
 }); 
 
 module.exports = Book = mongoose.model('books',BookSchema);

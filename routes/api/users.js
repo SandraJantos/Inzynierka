@@ -54,8 +54,7 @@ router.post('/login',(req,res) => {
 	User.findOne({email})
 	.then(u => {
 		if(!u){
-				errors.email = 'User does not exist';
-			 
+			errors.email = 'User does not exist';
 			return res.status(404).json(errors);
 		}
 
@@ -86,7 +85,6 @@ router.get('/usersList', (req, res) => {
         errors.noprofile = 'There are no users';
         return res.status(404).json(errors);
       }
-
       res.json(users);
     })
     .catch(err => res.status(404).json({ profile: 'There are no users' }));

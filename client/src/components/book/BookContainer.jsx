@@ -17,14 +17,17 @@ class BookContainer extends Component {
 		this.state = {
 			action:null,
 			redirect:false,
+			text:'',
+			userName:''
 		} 
 	};    
 
 	componentDidMount(){
 		this.props.getBooksList(); 
-   		this.props.getCurrentUser();
    		this.props.getReservations();
-
+		if (this.props.user) {
+			this.setState({userName:this.props.user.name});
+		}
 	}
 	makeReservation = (ownerId, bookId, bookState) => {
 		console.log(this.props.user.id,ownerId);
@@ -66,11 +69,17 @@ class BookContainer extends Component {
 		}
 	this.props.updateReservation(reservationsObj,reservationId,'2')
 	}
+
+	addReview = (bookId, rate) => {
+		this.props.addReview(bookId,rate.toString(),this.state.text, this.state.userName);
+	}
 	render() { 
 		const {book,users,user,reservations} = this.props; 
 		console.log(reservations);
 		return (
-			<Book exchangeBook={this.exchangeBook} user={user} book={book} reservations={reservations}
+			<Book addReview={this.addReview} exchangeBook={this.exchangeBook} 
+			user={user} book={book} reservations={reservations}
+			formData={this.state} onChange={v=>this.setState(v)} 
 			makeReservation={this.makeReservation} users={users} />
 		);
 	} 
@@ -97,6 +106,7 @@ function mapDispatchToProps(dispatch) {
 		getReservations: () => dispatch(reservationAction.getReservations()),
 		makeReservation: (reservationsObj,bookState) => dispatch(reservationAction.makeReservation(reservationsObj,bookState)),
 		updateReservation: (reservationsObj,reservationId,bookState) => dispatch(reservationAction.updateReservation(reservationsObj,reservationId,bookState)),
+		addReview: (bookId,rate,text,user) => dispatch(booksAction.addReview(bookId,rate,text,user)),
 
 
 	} 

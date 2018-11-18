@@ -5,6 +5,7 @@ import 'moment/locale/cs';
 import 'react-datepicker/dist/react-datepicker.css';
 import validator from 'validator';
 import Select from "react-select";
+import Textarea from '../textarea/Textarea';
 
 class Input extends Component {
   constructor(props){
@@ -30,7 +31,9 @@ class Input extends Component {
     else if (type === "email"){
       input = <input className={`input-style ${isInvalid ? isInvalid : ''} ${readonly ? 'successInput' : ''}`} type={type||'text'} readOnly={readonly ? true : false} onChange={this.handleChange} {...rest}/>
     }
-
+    else if (type === "textarea"){
+      input = <Textarea className={`textarea ${isInvalid ? isInvalid : '' }`} type={'text'} readOnly={readonly ? true : false} onChange={this.handleChange} {...rest}/> 
+    }
     else if (type === "checkbox"){ 
       input = <input readOnly={readonly ? true : false} checked={this.props.value||false} type={type} onChange={readonly ? {} : e=>onChange(e.target.checked)} {...rest}/>
     }

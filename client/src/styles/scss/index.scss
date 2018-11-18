@@ -11,6 +11,8 @@
 	top:0;
 }
 
-
+.star-svg.star-selected .star {
+  fill: rgb(255, 235, 59) !important;
+}
 @import './_home';
 @import './_planner';

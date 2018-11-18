@@ -84,7 +84,7 @@ router.post(
           { $set: {state:req.body.state}}
         ).then(book => res.json(book));
       } else {
-        console.log("sd");
+        console.log("error");
       }
     })
   }
@@ -100,7 +100,7 @@ router.post(
           { $set: {reservationState:req.body.reservationState}}
         ).then(book => res.json(book));
       } else {
-        console.log("sd");
+        console.log("error");
       }
     })
   }
@@ -121,10 +121,32 @@ router.post(
           }}}
         ).then(book => res.json(book));
       } else {
-        console.log("sd");
+        console.log("error");
       }
     }) 
   }
 ); 
+
+router.post(
+  '/review/:id',
+  (req, res) => {
+console.log(req);
+    Book.findById(req.params.id)
+      .then(r => {
+        const newReview = {
+          text: req.body.text,
+          user: req.body.user,
+          rate: req.body.rate
+        };
+
+        // Add to comments array
+        r.reviews.unshift(newReview);
+
+        // Save
+        r.save().then(review => res.json(review));
+      })
+      .catch(err => res.status(404).json({ reviewnotfound: 'No review found' }));
+  }
+);
 
 module.exports = router;
