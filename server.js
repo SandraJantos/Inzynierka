@@ -10,6 +10,7 @@ const users = require('./routes/api/users');
 const books = require('./routes/api/books');
 const chats = require('./routes/api/chats');
 const channel = require('./routes/api/channel');
+const reservations = require('./routes/api/reservations');
 
 const app = express(); 
 
@@ -38,6 +39,7 @@ app.use('/api/users',users);
 app.use('/api/books',books);
 app.use('/api/chats',chats);
 app.use('/api/channel',channel);
+app.use('/api/reservations',reservations);
 
 // app.use(require('webpack-dev-middleware')(compiler, {
 //   noInfo: true,
