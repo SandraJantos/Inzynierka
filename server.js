@@ -60,7 +60,7 @@ app.get('*', (req, res) => {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
+mongoose.connect(dbUrl || process.env.MONGODB_URI)
     .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());

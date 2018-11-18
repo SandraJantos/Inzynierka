@@ -32,11 +32,11 @@ class ReservationsContainer extends Component {
 		console.log(user.id);
 		return (
 			<Reservations books={books} redirectToProfile={this.redirectToProfile} 
-			reservationsWaiting1={reservations.filter(e => e.first.owner===user.id).filter(e => Object.keys(e).indexOf('second')===-1)} users={users}
-			reservationsWaiting2={reservations.filter(e => e.first.createdBy===user.id).filter(e => Object.keys(e).indexOf('second')===-1)} users={users}
+			reservationsWaiting1={((reservations||[]).filter(e => e.first.owner===user.id)||[]).filter(e => Object.keys(e).indexOf('second')===-1)} users={users}
+			reservationsWaiting2={((reservations||[]).filter(e => e.first.createdBy===user.id)||[]).filter(e => Object.keys(e).indexOf('second')===-1)} users={users}
 	
-			reservationsInProgress1={reservations.filter(e => e.first.owner===user.id).filter(e => Object.keys(e).indexOf('second') >-1)} 
-			reservationsInProgress2={reservations.filter(e => (e.second||{}).owner===user.id).filter(e => Object.keys(e).indexOf('second') >-1)}  /> 
+			reservationsInProgress1={((reservations||[]).filter(e => e.first.owner===user.id)||[]).filter(e => Object.keys(e).indexOf('second') >-1)} 
+			reservationsInProgress2={((reservations||[]).filter(e => (e.second||{}).owner===user.id)||[]).filter(e => Object.keys(e).indexOf('second') >-1)}  /> 
 			);
 	} 
 }

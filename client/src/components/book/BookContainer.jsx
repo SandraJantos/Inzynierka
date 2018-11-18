@@ -79,10 +79,10 @@ class BookContainer extends Component {
 function mapStateToProps (state,ownProps) {
 	console.log(ownProps);
 	return {
-		book:state.books.find(e => e._id === ownProps.bookId),
+		book:(state.books||[]).find(e => e._id === ownProps.bookId),
 		users:state.users,
 		user:state.user,
-		reservations:state.reservations.find(e => e._id === ownProps.reservationId)
+		reservations:(state.reservations||[]).find(e => e._id === ownProps.reservationId)
 
 	}
 }
