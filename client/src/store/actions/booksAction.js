@@ -58,7 +58,7 @@ export const addReview = (id,rate,text, user) => dispatch => {
 }
 
 export const getBook = (id) => dispatch => {
-  axios.get('/api/books/'+id+'/')
+  axios.get('/api/books/'+id)
   .then(e => dispatch(bookReceivedAction(e.data)))
   .catch(err => console.log(err))
 }
