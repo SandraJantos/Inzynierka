@@ -54,22 +54,26 @@ router.post('/', upload.single('image'), (req,res) => {
 })
 
 router.get('/', (req, res) => {
-  Book.find().then(files => {
-    if (!files || files.length === 0) {
+  Book.find().then(books => {
+    if (!books || books.length === 0) {
       return res.status(404).json({
-        err: 'No files exist'
+        err: 'No books exist'
       });
     }
 
-    return res.json(files);
+    return res.json(books);
   });
 });
-router.get('/:id', (req, res, next) => {
-  Book.findOne({'image.filename': req.params.id}, (err, x) => {console.log(req.params.id);
-    if (err) return res.sendStatus(404)
-      console.log(res);
-      fs.createReadStream('../../public/uploads/'+req.params.id).pipe(res);
 
+router.get('/:id', (req, res, next) => {
+  Book.findOne({ _id: req.params.id }).then(book => {
+    if (book) {
+      return res.status(404).json({
+        err: 'No book exist'
+      });
+    }
+
+    return res.json(book);
   })
 })
 
