@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import InBox from './InBox';
 import { withRouter } from 'react-router'
 import postAction from 'store/actions/postAction';
+import userAction from 'store/actions/userAction';
 
 class InBoxContainer extends Component { 
 	constructor (props) {
@@ -12,18 +13,23 @@ class InBoxContainer extends Component {
 	};    
   componentDidMount(){
     this.props.getMessages();
+	this.props.getUsersList();
+
   }
+
 	render() {
-		const {posts} = this.props;
+		const {posts,users} = this.props;
 		return ( 
-			<InBox posts={posts} />
+			<InBox users={users} posts={posts} />
 			);
 	}
 }
 function mapStateToProps (state) {
 	return {
 		user: state.user,
-		posts: state.posts.filter(e => e.recipient === state.user.id)
+		posts: state.posts.filter(e => e.recipient === state.user.id),
+		users: state.users,
+
 	}
 }
 
@@ -32,6 +38,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 		sendMessage: (sender,recipient,text) => dispatch(postAction.sendMessage(sender,recipient,text)),
 		getMessages: () => dispatch(postAction.getMessages()),
+		getUsersList: () => dispatch(userAction.getUsersList()),
 
 	}
 }
