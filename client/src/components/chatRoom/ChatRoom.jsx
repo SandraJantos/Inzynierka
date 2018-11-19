@@ -20,10 +20,10 @@ class ChatRoom extends Component {
 				/>
 				<button onClick={()=>{createChannel()}}>add</button>
 				{channels.map(el => <div style={activeChannel===el._id ? {fontWeight:'700'} : {}} 
-				onClick={()=>{changeChannel(el)}}><span style={{cursor:'pointer'}}>{el.name}</span></div>)}
+				onClick={()=>{changeChannel(el)}}><span style={{cursor:'pointer'}}>{(el||{}).name}</span></div>)}
 			</div>
 			<div className="col-md-8">
-			{(messages||[]).map(el => <div>{`${el.user.name} ${el.text}`}</div>)}
+			{(messages||[]).map(el => <div>{`${(el.user||{}).name} ${el.text}`}</div>)}
 				<Form
 				formData={formData} 
 				onChange={onChange}  
@@ -33,7 +33,7 @@ class ChatRoom extends Component {
 				/>
 				<button onClick={()=>{action()}}>send</button>
 			</div>
-			{usersConnected.map(el => <div>{el.name}</div>)}
+			{usersConnected.map(el => <div>{(el||{}).name}</div>)}
 		</div>
 		);
 	} 

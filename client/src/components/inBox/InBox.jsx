@@ -19,6 +19,7 @@ class InBox extends Component {
 		const h = (name)=>this.headerCell(name);
 		const b = (name)=>this.bodyCell(name);
 		const {posts,users} = this.props;
+		console.log(users,posts);
 		return ( 
 			<Fragment>
 		<div className="table-responsive">
@@ -30,8 +31,8 @@ class InBox extends Component {
                </tr>
              </thead>
              <tbody>
-             {this.props.posts.map(e => <tr key={e._id}>
-             	{b((users.find(el => el._id === e.sender))).name}
+             {posts.map(e => <tr key={e._id}>
+             	{b((users.find(x=>x._id == e.sender)||{}).name)}
              	{b(e.text)}
 
               </tr>)}
@@ -40,8 +41,8 @@ class InBox extends Component {
            </div>
 			</Fragment>
 			);
-	}
+	} 
 }
-
+ 
 
 export default InBox;
