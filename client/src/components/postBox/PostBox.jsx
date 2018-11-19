@@ -8,7 +8,7 @@ class PostBox extends Component {
 	render() {
 		const {sendMsg,formData,onChange} = this.props;
 		return ( 
-			<Fragment>
+			<div className="postForm">
 				<Form
 				formData={formData} 
 				onChange={onChange}  
@@ -17,8 +17,8 @@ class PostBox extends Component {
 
 				]} 
 				/>
-				<button onClick={()=>{sendMsg()}}>Send message</button>
-			</Fragment>
+				<button onClick={()=>{sendMsg()}}>Wyślij</button>
+			</div>
 			);
 	}
 }

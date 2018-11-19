@@ -11,9 +11,9 @@ class MyBooks extends Component {
 				formData={formData} 
 				onChange={onChange}  
 				schema={[
-				{name:'title', path:'title'}, 
-				{name:'author', path:'author'},
-				{name:'description', path:'description'},
+				{name:'tytuł', path:'title'}, 
+				{name:'autor', path:'author'},
+				{name:'opis', path:'description'},
 				{name:'isbn', path:'isbn'}
 			]} 
 			/>
@@ -26,8 +26,8 @@ class MyBooks extends Component {
 			<button onClick={action}>create</button>
 			<div>
 				{books ? books.map(el => <div>
-					<div>title:{el.title}</div>
-					<div>description:{el.description}</div>
+					<div>{`tytuł:${el.title}`}</div>
+					<div>{`opis:${el.description}`}</div>
 					<img style={{width:'200px'}} src={`https://s3.amazonaws.com/samimagesbucket/${(el.image||{}).key}`}  />
 				</div>
 				) : null}

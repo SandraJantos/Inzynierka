@@ -67,7 +67,7 @@ class Book extends Component {
 					{Object.keys(reservations||{}).length > 0 && book.reservationState==='0' ? <div>
 						{`Czy chcesz wymienić tą książkę z ${users.find(e => e._id === reservations.first.createdBy).name}`}
 						<button onClick={()=>exchangeBook(reservations._id,book._id,reservations.first.createdBy)}>WYMIEŃ</button>
-					</div> : (book.reservationState==='0' && book.user !== user.id 
+					</div> : (book.reservationState==='0' && book.user !== user.id && Object.keys(user||{}).length !== 0
 					?  <button onClick={()=>makeReservation(book.user,book._id)}>Rezerwuj</button> : null)}
 				</div>
 				<div>OPINIE</div>

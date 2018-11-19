@@ -7,7 +7,6 @@ import { withRouter } from 'react-router';
 class ChatRoom extends Component {
 	render() {
 	const {formData,onChange,action,usersConnected,chatRooms,messages,createChannel,channels,changeChannel,activeChannel} = this.props;
-	console.log(usersConnected);
 		return (
 		<div>
 			<div className="col-md-4">
@@ -15,10 +14,10 @@ class ChatRoom extends Component {
 				formData={formData} 
 				onChange={onChange}  
 				schema={[
-				{name:'roomName', path:'roomName'}, 
+				{name:'pokój', path:'roomName'}, 
 				]} 
 				/>
-				<button onClick={()=>{createChannel()}}>add</button>
+				<button onClick={()=>{createChannel()}}>Dodaj</button>
 				{channels.map(el => <div style={activeChannel===el._id ? {fontWeight:'700'} : {}} 
 				onClick={()=>{changeChannel(el)}}><span style={{cursor:'pointer'}}>{(el||{}).name}</span></div>)}
 			</div>
@@ -28,10 +27,10 @@ class ChatRoom extends Component {
 				formData={formData} 
 				onChange={onChange}  
 				schema={[
-				{name:'text', path:'text'}, 
+				{name:'', path:'text'}, 
 				]} 
 				/>
-				<button onClick={()=>{action()}}>send</button>
+				<button onClick={()=>{action()}}>wyślij</button>
 			</div>
 			{usersConnected.map(el => <div>{(el||{}).name}</div>)}
 		</div>

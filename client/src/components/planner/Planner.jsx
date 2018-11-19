@@ -72,7 +72,7 @@ class Planner extends Component {
         <div className="wip"
         onDragOver={(e)=>this.onDragOver(e)}
         onDrop={(e)=>{this.onDrop(e, "unread")}}>
-        <span className="book-header">OCZEKUJĄCE</span>
+        <span className="book-header">DO PRZECZYTANIA</span>
         {books.unread}
         </div>
         <div className="inProgess"
@@ -84,7 +84,7 @@ class Planner extends Component {
         <div className="droppable" 
         onDragOver={(e)=>this.onDragOver(e)}
         onDrop={(e)=>this.onDrop(e, "complete")}>
-        <span className="book-header">GOTOWE</span>
+        <span className="book-header">PRZECZYTANE</span>
         {books.complete}
         </div>
       </div>
