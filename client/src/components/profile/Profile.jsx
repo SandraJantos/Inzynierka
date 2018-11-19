@@ -13,7 +13,7 @@ class Profile extends Component {
         formData={formData} 
         onChange={onChange}  
         schema={[
-        {name:'waszystkie', path:'reservedBooks',type:'checkbox'}, 
+        {name:'zarezerwowane', path:'reservedBooks',type:'checkbox'}, 
         ]} 
       /> 
       {books.length>0 ? books.map(el => <div>

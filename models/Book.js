@@ -41,9 +41,9 @@ const BookSchema = new Schema({
 	reviews:  [
     {
       user: {
-        // type: Schema.Types.ObjectId,
-        // ref: 'users'
-			type:String,
+		// type: Schema.Types.ObjectId,
+		// ref: 'users'
+		type:String,
       },
       text: {
         type: String,
@@ -53,7 +53,11 @@ const BookSchema = new Schema({
         type: String
       },
     }
-  ]
+  ],
+  favourite :{
+	type: Boolean,
+	default: false
+} 
 }); 
 
 module.exports = Book = mongoose.model('books',BookSchema);

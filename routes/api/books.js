@@ -111,6 +111,23 @@ router.post(
 );
 
 router.post(
+  '/favourite/:id',
+  (req, res) => {
+    console.log(req.body);
+    Book.findOne({ _id: req.params.id }).then(book => {
+      if (book) {
+        Book.update(
+          { _id: req.params.id },
+          { $set: {favourite :req.body.favourite }}
+        ).then(book => res.json(book));
+      } else {
+        console.log("error");
+      }
+    })
+  }
+);
+
+router.post(
   '/reservationAction/:id',
   (req, res) => {
     console.log(req.body);
@@ -134,7 +151,6 @@ router.post(
 router.post(
   '/review/:id',
   (req, res) => {
-console.log(req);
     Book.findById(req.params.id)
       .then(r => {
         const newReview = {

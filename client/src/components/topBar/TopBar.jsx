@@ -39,10 +39,10 @@ class TopBar extends Component {
             </ul>
             :
             <ul className="nav navbar-nav button-holder">
+              <Link to={`/`}>HOME</Link>
               <Link to={`/login`}>Login</Link>
               <Link to={`/registration`}>Register</Link>
               <Link to={`/map`}>map</Link>
-
             </ul>}
           </div>
         </div>

@@ -73,11 +73,15 @@ class BookContainer extends Component {
 	addReview = (bookId, rate) => {
 		this.props.addReview(bookId,rate.toString(),this.state.text, this.state.userName);
 	}
+
+	addToFavorites = (bookId, favourite) => {
+		this.props.addToFavorites(bookId,!favourite);
+	}
 	render() { 
 		const {book,users,user,reservations} = this.props; 
 		console.log(reservations);
 		return (
-			<Book addReview={this.addReview} exchangeBook={this.exchangeBook} 
+			<Book addToFavorites={this.addToFavorites} addReview={this.addReview} exchangeBook={this.exchangeBook} 
 			user={user} book={book} reservations={reservations}
 			formData={this.state} onChange={v=>this.setState(v)} 
 			makeReservation={this.makeReservation} users={users} />
@@ -107,6 +111,8 @@ function mapDispatchToProps(dispatch) {
 		makeReservation: (reservationsObj,bookState) => dispatch(reservationAction.makeReservation(reservationsObj,bookState)),
 		updateReservation: (reservationsObj,reservationId,bookState) => dispatch(reservationAction.updateReservation(reservationsObj,reservationId,bookState)),
 		addReview: (bookId,rate,text,user) => dispatch(booksAction.addReview(bookId,rate,text,user)),
+		addToFavorites: (bookId,favourite) => dispatch(booksAction.addToFavorites(bookId,favourite)),
+
 
 
 	} 

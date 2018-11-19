@@ -32,13 +32,23 @@ class Book extends Component {
         rating: newRating
       });
     }
- 
+ 	
 	render() { 
-		const {addReview,formData, onChange, book,users,makeReservation,user,exchangeBook,ifBookReserved,reservations} = this.props; 
-		console.log(this.state.rating);
+		const {addReview,formData, addToFavorites, onChange, book,users,makeReservation,user,exchangeBook,ifBookReserved,reservations} = this.props; 
 	
 		return (
 			<div>
+			<div>
+			Dodaj do ulubionych <i onClick={()=>addToFavorites(book._id,book.favourite)} style={book.favourite ? {'color':'rgb(255, 235, 59)'} : {'color':'rgb(203, 211, 227)'}} className="glyphicon glyphicon-star" />
+			</div>
+			{book.reviews.length> 0 ?
+			<StarRatings
+			rating={((book||[]).reviews.reduce((a,e) => (a + Number(e.rate)),0 ) / book.reviews.length)}
+			starRatedColor='rgb(255, 235, 59)'
+			numberOfStars={6}
+			name='rating'
+			starDimension='20px'
+			/> : null}
 			<img style={{width:'200px'}} src={`https://s3.amazonaws.com/samimagesbucket/${((book||{}).image||{}).key}`}  />
 			<div>TYYTUŁ:{book.title}</div>
 			<div>DATA:{moment(book.created).format('DD.MM.YYYY HH:mm')}</div>
@@ -52,6 +62,18 @@ class Book extends Component {
              </div> : (book.reservationState==='0' && book.user !== user.id 
              	?  <button onClick={()=>makeReservation(book.user,book._id)}>Rezerwuj</button> : null)}
              </div>
+             <div>OPINIE</div>
+             {book.reviews.length> 0 ? book.reviews.map(e => <div>
+             	<div>{e.text}</div>
+             	<div>{e.user}</div>
+             	<StarRatings
+				rating={Number(e.rate)}
+				starRatedColor='rgb(255, 235, 59)'
+				numberOfStars={6}
+				starDimension='20px'
+			/>
+             	</div> 
+             	) : null}
 			<Form
 				formData={formData} 
 				onChange={onChange}  
