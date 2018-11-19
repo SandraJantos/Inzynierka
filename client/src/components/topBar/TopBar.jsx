@@ -32,6 +32,7 @@ class TopBar extends Component {
               <Link to={`${match.path}planner`}>planner</Link>
               <Link to={`${match.path}map`}>map</Link>
               <Link to={`${match.path}reservations`}>reservations</Link>
+              <Link to={`${match.path}inbox`}>inbox</Link>
 
                 <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut

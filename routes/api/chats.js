@@ -1,20 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const bcryptjs = require('bcryptjs');
-const jwt = require('jsonwebtoken');
 const User = require('../../models/User');
-const keys = require('../../config/keys');
-const passport = require('passport');
-const validateRegisterData= require('../../validation/register');
-const validateLoginData= require('../../validation/login');
 const Chat = require('../../models/Chat');
 const ChatDetail = require('../../models/ChatDetail');
 const http = require('http').Server(express);
 const io = require('socket.io')(http);
 const Message = require('../../models/Message');
-const Channel = require('../../models/Channel');
 
-module.exports = router;
 
 router.get('/list', (req, res, next) => {
     Chat.find()

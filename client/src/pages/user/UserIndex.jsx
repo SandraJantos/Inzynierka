@@ -10,6 +10,7 @@ import PlannerPage from './planner/PlannerPage';
 import MapPage from '../common/map/MapPage';
 import BookPage from '../common/book/BookPage';
 import ReservationsPage from './reservations/ReservationsPage';
+import InBoxPage from './inBox/InBoxPage';
 
   
 class UserIndex extends Component { 
@@ -28,6 +29,7 @@ class UserIndex extends Component {
           <Route exact path="/map/" component={MapPage} />
           <Route exact path="/book/:name" component={BookPage} />
           <Route exact path="/reservations" component={ReservationsPage} />
+          <Route exact path="/inbox" component={InBoxPage} />
 
         </Switch>
       </UserPage>

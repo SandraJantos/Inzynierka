@@ -18,7 +18,6 @@ export const getReservations = () => dispatch => {
 
 
 export const makeReservation = (r,state) => dispatch => {
-	console.log(r);
 	axios.post('/api/reservations/newReservation/',r)
 	.then(e => dispatch(updateBookReservationStatus(e.data.first.bookId,state)))
 	.catch(err => console.log(err))
