@@ -31,7 +31,7 @@ class UserIndex extends Component {
           <Route exact path="/reservations" component={ReservationsPage} />
           <Route exact path="/inbox" component={InBoxPage} />
 
-        </Switch>
+        </Switch> 
       </UserPage>
       </div>
     );

@@ -103,7 +103,7 @@ class Book extends Component {
 				<button onClick={()=>{addReview(book._id,this.state.rating)}}>dodaj</button>
 				{Object.keys(user||{}).length > 0 ? <div onClick={()=>{this.showPostModal()}}>{`Wyślij wiadomość do ${owner}`}</div> : null}
 				{this.state.showPostModal===true ? <ModalContainer hide={()=>{this.setState({showPostModal:false})}}>
-				<PostBoxContainer owner={book.user} />
+				<PostBoxContainer hide={()=>{this.setState({showPostModal:false})}} owner={book.user} />
 				</ModalContainer> : null}
 			</div>
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import booksAction from 'store/actions/booksAction';
+import userAction from 'store/actions/userAction';
 
 class ProfileContainer extends Component {
     constructor (props) {
@@ -12,6 +13,8 @@ class ProfileContainer extends Component {
   };   
   componentDidMount(){
     this.props.getBooksList();
+    this.props.getUsersList();
+
   }
 
   filter = (books) => {
@@ -24,9 +27,9 @@ class ProfileContainer extends Component {
 
   }
   render() {
-  	const {books, ...rest} = this.props;
+  	const {books,user,owner, ...rest} = this.props;
     return (
-        <Profile formData={this.state} onChange={v=>this.setState(v)}  books={this.filter(books)} {...rest}/>
+        <Profile user={user} owner={owner} formData={this.state} onChange={v=>this.setState(v)}  books={this.filter(books)} {...rest}/>
     );
   } 
 } 
@@ -34,7 +37,9 @@ class ProfileContainer extends Component {
 
 function mapStateToProps (state,ownProps) {
 	return {
-    books: state.books.filter(e => e.user === ownProps.userId)
+    books: state.books.filter(e => e.user === ownProps.userId),
+    owner: state.users.find(e=>e._id === ownProps.userId),
+    user: state.user
 	}
 }
 
@@ -43,6 +48,7 @@ function mapDispatchToProps(dispatch) {
 	return {
 	
     getBooksList: (r) => dispatch(booksAction.getBooksList(r)),
+    getUsersList: () => dispatch(userAction.getUsersList()),
 
 
 	} 

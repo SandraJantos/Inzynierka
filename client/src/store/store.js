@@ -19,6 +19,7 @@ import activeChannelReducer from './reducers/activeChannelReducer';
 import tokenReducer from './reducers/tokenReducer';
 import reservationsReducer from './reducers/reservationsReducer';
 import inboxReducer from './reducers/inboxReducer';
+import successReducer from './reducers/successReducer';
 
 const stackReducers = (...reducers) => {
   return (state=[], action) => {
@@ -50,7 +51,9 @@ export const initialState = {
   channels:[],
   activeChannel:{},
   reservations:[],
-  posts:[]
+  posts:[],
+  success:'',
+
 }
 
 export const store = createStore(
@@ -71,7 +74,9 @@ export const store = createStore(
       activeChannel:activeChannelReducer,
       token:tokenReducer,
       reservations:reservationsReducer,
-      posts:inboxReducer
+      posts:inboxReducer,
+      success: successReducer,
+
 
 
     }),

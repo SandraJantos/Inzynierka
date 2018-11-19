@@ -1,4 +1,5 @@
 import axios from 'axios';
+import announceSuccess from './successAction'
 
 export const POSTS_RECEIVED = 'POSTS_RECEIVED';
 
@@ -8,9 +9,9 @@ export const messagesReceivedAction = (posts) => {
     posts
   };
 }
-export const sendMessage = (sender,recipient,text) => dispatch => {
+export const sendMessage = (sender,recipient,text,actionId) => dispatch => {
   axios.post('/api/posts/sendMessage/',{sender,recipient,text })
-  .then(e => console.log(e))
+  .then(()=>dispatch(announceSuccess(actionId)))
   .catch(err => console.log(err))
 }
  
