@@ -8,6 +8,7 @@ import userAction from 'store/actions/userAction';
 import io from 'socket.io-client';
 import $ from 'jquery'; 
 import { values } from 'lodash'
+import { withRouter } from 'react-router';
 
 const socket = io('', { path: '/api/chat' });
 
@@ -50,28 +51,29 @@ class ChatRoomContainer extends Component {
 			this.props.getCurrentUser();
 		}
 		socket.emit('chat mounted', this.props.user);
-/*		socket.emit('USER_CONNECTED', this.props.user);*/
 
 		this.props.getChannels()
+
 		socket.on('receive socket', socketID =>
 			this.props.receiveSocket(socketID)
-			);
+		);
 		socket.on('new channel', channel =>{
-			console.log(channel);
 			this.props.getChannels()
 		} ); 
+
 		socket.on('new message', message => {
 			this.props.getMessages(this.props.activeChannel.id)
-
 		})  
+		socket.emit('joinRoom', this.props.user);
+
 		socket.on('usersConnected', (users)=>{
-			console.log(users);
 			this.setState({ usersConnected: users })
 		})
-		// socket.on('USER_DISCONNECTED', (users)=>{
-		// 	this.setState({ usersConnected: values(users) })			
-		// })
 
+		socket.on('usersDisconnected', (users)=>{
+			this.setState({ usersConnected: users })
+			this.props.history.push('/');
+		})
 	}
 
 	changeChannel = (channel) => {
@@ -79,8 +81,6 @@ class ChatRoomContainer extends Component {
 		this.setState(prevState => ({activeChannel:prevState.activeChannel===channel._id ? null : channel._id}))
 		this.props.changeChannel(channel)
 		this.props.getMessages(channel._id)
-						socket.emit('joinRoom', this.props.user);
-
 		socket.on('getClients', message => {
 			console.log(message);
 
@@ -132,4 +132,4 @@ function mapDispatchToProps(dispatch) {
 		getUsersList: () => dispatch(userAction.getUsersList()),
 	} 
 }
-export default connect(mapStateToProps, mapDispatchToProps)(ChatRoomContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ChatRoomContainer));
