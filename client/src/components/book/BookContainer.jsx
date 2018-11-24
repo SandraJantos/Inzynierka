@@ -30,16 +30,11 @@ class BookContainer extends Component {
 		}
 	}
 	makeReservation = (ownerId, bookId, bookState) => {
-		console.log(this.props.user.id,ownerId);
-		//this.props.reserveBook(bookId,'1',this.props.user.id,new Date());
 		let reservationsObj = {
 			date:new Date(),
 			book:bookId,
 			reservationState:'1'
 		}
-		// if ((this.props.reservations||[]).filter(e => (e.first||{}).createdBy ===ownerId)
-		// 	.filter(e => (e.first||{}).owner === this.props.user.id).length === 0) {
-			console.log((this.props.reservations||[]).filter(e => (e.first||{}).createdBy ===this.props.user.id));
 			Object.assign(reservationsObj, {
 				first: {
 				createdBy: this.props.user.id,
@@ -48,17 +43,7 @@ class BookContainer extends Component {
 			}}) 
 		this.props.makeReservation(reservationsObj,'1')
 		}
-		// else{
-		// 	Object.assign(reservationsObj, {
-		// 		second: {
-		// 		createdBy: this.props.user.id,
-		// 		owner:ownerId,
-		// 		bookId
-		// 	}})
-		// this.props.updateReservation(reservationsObj,
-		// 	(this.props.reservations||[]).find(e => (e.first||{}).createdBy === ownerId && (e.first||{}).owner === this.props.user.id)._id,'1')
 
-		// }
 	exchangeBook = (reservationId, bookId,ownerId) => {
 		let reservationsObj = {
 			second: {

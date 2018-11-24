@@ -11,7 +11,7 @@ class ReservationsContainer extends Component {
 	constructor (props) {
 		super(props)
 		this.state = {
-
+			reservationId:null
 
 		} 
 	};     
@@ -27,16 +27,29 @@ class ReservationsContainer extends Component {
 			state: { id: userId,reservationId }});
 
 	}
+	confirmExchange = (id, key) => {
+		this.props.confirmExchange(id,key);
+		this.setState({reservationId:id});
+	}
+	componentDidUpdate(prevProps) {
+		if (prevProps.reservationConfirmed !== this.props.reservationConfirmed 
+			&& this.props.reservationConfirmed.first.exchanged===true && this.props.reservationConfirmed.second.exchanged===true ) {
+			this.props.addPoints(this.props.reservationConfirmed.first.createdBy);
+			this.props.addPoints(this.props.reservationConfirmed.second.createdBy);
+
+
+		}
+	}
 	render() {
 		const {books,users,reservations,user} = this.props;
-		console.log(user.id);
+		console.log(this.props.reservationConfirmed);
 		return (
-			<Reservations books={books} redirectToProfile={this.redirectToProfile} 
-			reservationsWaiting1={(((reservations||[]).filter(e => (e.first||{}).owner===user.id))||[]).filter(e => Object.keys(e).indexOf('second')===-1)} users={users}
-			reservationsWaiting2={(((reservations||[]).filter(e => (e.first||{}).createdBy===user.id))||[]).filter(e => Object.keys(e).indexOf('second')===-1)} 
+			<Reservations confirmExchange={this.confirmExchange} user={user} books={books} redirectToProfile={this.redirectToProfile} 
+			reservationsWaiting1={(((reservations||[]).filter(e => (e.first||{}).owner===user.id))||[]).filter(e => Object.keys(e.second).length===1)} users={users}
+			reservationsWaiting2={(((reservations||[]).filter(e => (e.first||{}).createdBy===user.id))||[]).filter(e => Object.keys(e.second).length===1)} 
 	
-			reservationsInProgress1={(((reservations||[]).filter(e => (e.first||{}).owner===user.id))||[]).filter(e => Object.keys(e).indexOf('second') >-1)} 
-			reservationsInProgress2={(((reservations||[]).filter(e => (e.second||{}).owner===user.id))||[]).filter(e => Object.keys(e).indexOf('second') >-1)}  /> 
+			reservationsInProgress1={(((reservations||[]).filter(e => (e.first||{}).owner===user.id))||[]).filter(e => Object.keys(e.second).length>1)} 
+			reservationsInProgress2={(((reservations||[]).filter(e => (e.second||{}).owner===user.id))||[]).filter(e => Object.keys(e.second).length>1)}  /> 
 			);
 	} 
 }
@@ -46,7 +59,8 @@ function mapStateToProps (state,ownProps) {
 		books:state.books,
 		users: state.users,
 		reservations:state.reservations,
-		user:state.user
+		user:state.user,
+		reservationConfirmed:state.reservationConfirmed
 	}
 }
 
@@ -57,6 +71,8 @@ function mapDispatchToProps(dispatch) {
 		getCurrentUser: (r) => dispatch(loginAction.getCurrentUser(r)),
 		getUsersList: () => dispatch(userAction.getUsersList()),
 		getReservations: () => dispatch(reservationAction.getReservations()),
+		confirmExchange: (id,key) => dispatch(reservationAction.confirmExchange(id,key)),
+		addPoints: (id) => dispatch(reservationAction.addPoints(id)),
 
 	}
 }

@@ -60,7 +60,7 @@ class Book extends Component {
 				<img style={{width:'200px'}} src={`https://s3.amazonaws.com/samimagesbucket/${((book||{}).image||{}).key}`}  />
 				<div>TYYTUŁ:{book.title}</div>
 				<div>DATA:{moment(book.created).format('DD.MM.YYYY HH:mm')}</div>
-				<div>UŻYTKOWNIK:owner</div>
+				<div>UŻYTKOWNIK:{owner}</div>
 				<div>Stan:{this.checkReservationState(book.reservationState)}</div>
 				<div>
 					{Object.keys(user||{}).length === 0 ? <div>Zaloguj się, aby zerezerwować książkę</div> : null}

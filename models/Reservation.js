@@ -15,6 +15,10 @@ const ReservationSchema = new Schema({
 		bookId: {
 			type: Schema.Types.ObjectId,
 			ref: 'books'
+		},
+		exchanged:{
+			type:Boolean,
+			default:false
 		}
 	},
 	second:{
@@ -29,6 +33,10 @@ const ReservationSchema = new Schema({
 		bookId: {
 			type: Schema.Types.ObjectId,
 			ref: 'books'
+		},
+		exchanged:{
+			type:Boolean,
+			default:false
 		}
 	},
 	date:{
@@ -38,9 +46,9 @@ const ReservationSchema = new Schema({
 	reservationState: {
 		type: String,
 		default: '0'
-	},
-	
+	}
+
 
 }); 
-   
+
 module.exports = Book = mongoose.model('reservation',ReservationSchema);

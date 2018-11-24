@@ -32,10 +32,10 @@ class ChatRoom extends Component {
 				/>
 				<button onClick={()=>{action()}}>wyślij</button>
 			</div>
-			{usersConnected.map(el => <div>{(el||{}).name}</div>)}
+			{usersConnected.map(el => <div>{`${(el||{}).name} dołączył`}</div>)}
 		</div>
 		);
 	} 
 }
-
+ 
 export default withRouter(ChatRoom);

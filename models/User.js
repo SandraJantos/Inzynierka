@@ -7,10 +7,10 @@ const UserSchema = new Schema({
 		type:String,
 		required:true
 	},
-	// surName:{
-	// 	type:String,
-	// 	required:true
-	// },
+	surName:{
+		type:String,
+		required:true
+	},
 	email:{
 		type:String,
 		required:true
@@ -20,15 +20,19 @@ const UserSchema = new Schema({
 		required:true
 	},
 	userType:{
-	type: String,
-    default: '0  '
-},
+		type: String,
+		default: '0'
+	},
 	location:{
-	type: String,
-    required:true
-}, 
-    books: [],
+		type: String,
+		required:true
+	}, 
+	points:{
+		type:Number,
+		default: 0
+
+	}
 
 }); 
-  
+ 
 module.exports = User = mongoose.model('users',UserSchema);

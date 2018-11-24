@@ -11,13 +11,11 @@ router.get('/reservationsList', (req, res) => {
 });
 
 router.post('/newReservation',(req,res) => {
-	console.log(req.body.first);
 	const newReservation = new Reservation(
 		req.body
 	)
 	newReservation.save(function (err, data) {
 		if(err) {
-			console.log(err);
 			return res.status(500).json({msg: 'internal server error'});
 		}
 		res.json(data);
@@ -41,5 +39,35 @@ router.post(
     })
   }
 );
+
+router.post(
+  '/confirmExchange/:id',
+  (req, res) => {
+    Reservation.findOne({ _id: req.params.id }).then(r => {
+      if (r) {
+        if (req.body.exchanged === 'first'){
+          Reservation.findOneAndUpdate(
+          { _id: req.params.id },
+            { $set: { 'first.exchanged':true}},
+            { new: true }
+            ).then(r => res.json(r));
+        }
+        else{
+          console.log("dd");
+          Reservation.findOneAndUpdate(
+            { _id: req.params.id },
+            { $set: { 'second.exchanged':true}},
+            { new: true }
+            )
+          .then(r => res.json(r));
+        }
+
+      } else {
+        console.log("sd");
+      }
+    })
+  }
+);
+
 module.exports = router;
 

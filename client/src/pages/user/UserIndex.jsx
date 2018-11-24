@@ -11,6 +11,7 @@ import MapPage from '../common/map/MapPage';
 import BookPage from '../common/book/BookPage';
 import ReservationsPage from './reservations/ReservationsPage';
 import InBoxPage from './inBox/InBoxPage';
+import FavoriteBooksPage from './favoriteBooks/FavoriteBooksPage';
 
   
 class UserIndex extends Component { 
@@ -30,9 +31,9 @@ class UserIndex extends Component {
           <Route exact path="/book/:name" component={BookPage} />
           <Route exact path="/reservations" component={ReservationsPage} />
           <Route exact path="/inbox" component={InBoxPage} />
-
+          <Route exact path="/favoriteBooks" component={FavoriteBooksPage} />
         </Switch> 
-      </UserPage>
+      </UserPage> 
       </div>
     );
   } 

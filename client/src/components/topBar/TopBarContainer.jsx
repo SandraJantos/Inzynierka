@@ -9,11 +9,13 @@ class TopBarContainer extends Component {
 
   componentDidMount(){
    this.props.getUsersList();
+    this.props.getUsersList()
+   
   } 
 
   render() {
     return (
-      <TopBar currentUser={this.props.user} 
+      <TopBar user={this.props.users.find(e => e._id === this.props.user.id)} currentUser={this.props.user} 
       logout={()=>this.props.logout(this.props.history)}/>
     );
   }
@@ -21,14 +23,14 @@ class TopBarContainer extends Component {
 
 function mapStateToProps(state,ownProps) {
   return {
-    user: state.user
+    user: state.user,
+    users:state.users
   };
 }
 
 function mapDispatchToProps(dispatch){
   return {
     logout: (history)=>dispatch(loginAction.logout(history)),
-    getCurrentUser: (id)=>dispatch(loginAction.getCurrentUser(id)),
     getUsersList: () => dispatch(userAction.getUsersList())
   }
 }

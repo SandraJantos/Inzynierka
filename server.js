@@ -14,8 +14,14 @@ const reservations = require('./routes/api/reservations');
 const posts = require('./routes/api/posts');
 
 const app = express(); 
+
+
+//const dev = app.get('env') !== 'production';
 const port = process.env.PORT || 5000;
 
+//app.use(express.static(path.join(__dirname, 'client')));
+
+//set env vars
 const bodyParser = require('body-parser');
 
 const db = process.env.MONGODB_URI;
@@ -25,6 +31,7 @@ let dbUrl = 'mongodb://superSam:superSam123@ds155299.mlab.com:55299/sam_db';
 const mongoose = require('mongoose');
 let loggedUsers = [];
 
+//app.use(cors());
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
@@ -36,25 +43,45 @@ app.use('/api/channel',channel);
 app.use('/api/reservations',reservations);
 app.use('/api/posts',posts);
 
+// app.use(require('webpack-dev-middleware')(compiler, {
+//   noInfo: true,
+//   publicPath: webpackConfig.output.publicPath
+// }));
+// app.use(require('webpack-hot-middleware')(compiler));
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname+'/client/public/index.html'));
+// });
+//load routers
 
 app.use(cors())
 
 if (process.env.NODE_ENV === 'production'){
-  app.use(express.static(path.join(__dirname, '/client/build')));
+app.use(express.static(path.join(__dirname, '/client/build')));
 
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname+'/client/build/index.html'));
+});
 }
 
 mongoose.Promise = global.Promise;
 mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
-.then(() => console.log("sucdsdsdsddddcess"))
-.catch(err => console.log(err))
+    .then(() => console.log("sucdsdsdsddddcess"))
+    .catch(err => console.log(err))
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
 
+
+// const server = app.listen(port, function(err) {
+//   if (err) {  
+//     consoles.log(err);
+//     return;
+//   }
+//   console.log('server listening on port: %s', port);
+// });
+
+// const server = require('http').createServer(app);
+// const io = require('socket.io').listen(server);
 
 const server = app.listen(port,  function(err) {
   if (err) {
@@ -63,45 +90,31 @@ const server = app.listen(port,  function(err) {
   console.log('server listening on port: %s', port);
 });
 
+// const io = new SocketIo(server, {path: '/api/chat'})
+//const socketEvents = require('./socketEvents')(io);
 let usersJoined = [];
 let connectedUsers = { }
-function addUser(userList, user){
-  let newList = Object.assign({}, userList)
-  newList[user.name] = user
-  return newList
-}
 
-function removeUser(userList, username){
-  let newList = Object.assign({}, userList)
-  delete newList[username]
-  return newList
-}
 
 const io = new SocketIo(server,{ path: '/api/chat'}) 
 io.on('connection', function(socket) {
-  socket.on('joinRoom', function(room,name) {
-    socket.join(room);
+
+  socket.on('joinRoom', function(name) {
+    if (usersJoined.filter(e => e.id === name.id).length>0) return;
+        socket.nickname = name;
+
+   usersJoined.push(socket.nickname);
+      io.emit('usersConnected', usersJoined)
 
   });
-  socket.on('USER_CONNECTED', (user)=>{
-    console.log(user);
-    user.socketId = socket.id
-    connectedUsers = addUser(connectedUsers, user)
-    socket.user = user
 
-
-    io.emit('USER_CONNECTED', connectedUsers)
-    console.log(connectedUsers);
+  socket.on('leaveRoom', (name) => {
+    if (!socket.nickname) return;
+    usersJoined.splice(usersJoined.indexOf(socket.nickname),1)
+      io.emit('usersConnected', usersJoined)
 
   })
-  socket.on('disconnect', ()=>{
-    if("user" in socket){
-      connectedUsers = removeUser(connectedUsers, socket.user.name)
 
-      io.emit('USER_DISCONNECTED', connectedUsers)
-      console.log("Disconnect", connectedUsers);
-    }
-  })
   socket.on('chat mounted', function(user) {
     socket.emit('receive socket', socket.id)
   })

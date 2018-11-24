@@ -11,7 +11,7 @@ class TopBar extends Component {
   } 
 
   render() {
-  const {userName,currentUser,match} = this.props;
+  const {userName,currentUser,match,user} = this.props;
   return (
   <nav className="user-navbar navbar navbar-default">
     <div className="container">
@@ -26,6 +26,8 @@ class TopBar extends Component {
             {Object.keys((currentUser||{})).length > 0 ?
             <ul className="navLinks nav navbar-nav">
               <li>name: {(currentUser||{}).name}</li>
+              <li>punkty: {(user||{}).points}</li>
+
               <Link to={`/`}>HOME</Link>
               <Link to={`${match.path}myBooks`}>my books</Link>
               <Link to={`${match.path}chat`}>chat</Link>
@@ -33,7 +35,8 @@ class TopBar extends Component {
               <Link to={`${match.path}map`}>map</Link>
               <Link to={`${match.path}reservations`}>reservations</Link>
               <Link to={`${match.path}inbox`}>inbox</Link>
-
+              <Link to={`${match.path}favoriteBooks`}>favoriteBooks</Link>
+              {(user||{}).points>100 ? <div>Odbierz nagrodę</div> : null}
                 <li style={{cursor:'pointer'}} onClick={this.props.logout}>
                 logOut
               </li> 

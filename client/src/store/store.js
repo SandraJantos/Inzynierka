@@ -20,6 +20,7 @@ import tokenReducer from './reducers/tokenReducer';
 import reservationsReducer from './reducers/reservationsReducer';
 import inboxReducer from './reducers/inboxReducer';
 import successReducer from './reducers/successReducer';
+import reservationConfirmedReducer from './reducers/reservationConfirmedReducer';
 
 const stackReducers = (...reducers) => {
   return (state=[], action) => {
@@ -53,6 +54,7 @@ export const initialState = {
   reservations:[],
   posts:[],
   success:'',
+  reservationConfirmed:{}
 
 }
 
@@ -76,7 +78,7 @@ export const store = createStore(
       reservations:reservationsReducer,
       posts:inboxReducer,
       success: successReducer,
-
+      reservationConfirmed:reservationConfirmedReducer
 
 
     }),

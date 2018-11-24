@@ -90,20 +90,35 @@ router.get('/usersList', (req, res) => {
     .catch(err => res.status(404).json({ profile: 'There are no users' }));
 });
 
-
-// router.get( 
-//   '/current',
-//   passport.authenticate('jwt', { session: false }),
-//   (req, res) => {
-//     res.json({
-// 		id: req.user.id,
-// 		name: req.user.name,
-// 		surName:req.user.surName,
-// 		email : req.user.email,
-// 		userType: req.user.userType
-//     });
-//   } 
-// );
+router.post(
+  '/addPoints/:id',
+  (req, res) => {
+    User.findOne({ _id: req.params.id }).then(r => {
+      if (r) {
+        User.findOneAndUpdate(
+          { _id: req.params.id },
+          { $inc: { points: 10 } },
+     
+        ).then(r => res.json(r));
+      } else {
+        console.log("sd");
+      }
+    })
+  }
+);
+router.get( 
+  '/current',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.json({
+		id: req.user.id,
+		name: req.user.name,
+		surName:req.user.surName,
+		email : req.user.email,
+		userType: req.user.userType
+    });
+  } 
+);
 
 module.exports = router;
 
