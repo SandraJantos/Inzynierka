@@ -80,7 +80,7 @@ const io = new SocketIo(server,{ path: '/api/chat'})
 io.on('connection', function(socket) {
 
   socket.on('joinRoom', function(name) {
-    if (usersJoined.filter(e => e.id === name.id).length>0) return;
+    if (usersJoined.filter(e => e.id === name.id).length>0)  io.emit('usersConnected', usersJoined);
         socket.nickname = name;
 
    usersJoined.push(socket.nickname);

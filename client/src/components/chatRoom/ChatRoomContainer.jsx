@@ -21,7 +21,8 @@ class ChatRoomContainer extends Component {
 			messages:[],
 			activeChannel:null,
 			usersConnected:[],
-
+			exit:false,
+			joined:false
 		} 
 	};    
 
@@ -64,7 +65,6 @@ class ChatRoomContainer extends Component {
 		socket.on('new message', message => {
 			this.props.getMessages(this.props.activeChannel.id)
 		})  
-		socket.emit('joinRoom', this.props.user);
 
 		socket.on('usersConnected', (users)=>{
 			this.setState({ usersConnected: users })
@@ -72,10 +72,16 @@ class ChatRoomContainer extends Component {
 
 		socket.on('usersDisconnected', (users)=>{
 			this.setState({ usersConnected: users })
-			this.props.history.push('/');
 		})
 	}
+	// componentDidUpdate(prevState) {
+	// 	if (prevState.usersConnected !== this.state.usersConnected && this.state.exit==-true
+	// 		&& this.state.usersConnected.filter(e => e.id === this.props.user.id).length===0) {
+	// 			this.props.history.push('/');
 
+
+	// 	}
+	// }
 	changeChannel = (channel) => {
 		socket.emit('leave channel', this.props.activeChannel);
 		this.setState(prevState => ({activeChannel:prevState.activeChannel===channel._id ? null : channel._id}))
@@ -90,6 +96,12 @@ class ChatRoomContainer extends Component {
 	leaveChat = () => {
 		console.log("fsdfs");
 		socket.emit('leaveRoom', this.props.user);
+		this.setState({joined:false})
+
+	}
+		joinChat = () => {
+		socket.emit('joinRoom', this.props.user);
+		this.setState({joined:true})
 
 	}
 	render() {
@@ -97,10 +109,12 @@ class ChatRoomContainer extends Component {
 		console.log(this.state.usersConnected);
 		return (
 			<Fragment>
+			{this.state.joined ? <Fragment>
 			<ChatRoom usersConnected={this.state.usersConnected} channels={channels} activeChannel={this.state.activeChannel} changeChannel={this.changeChannel}
 			createChannel={this.createChannel} messages={this.props.messages} socket={socket} formData={this.state} chatRooms={chatRooms}
 			onChange={v=>this.setState(v)} action={this.sendMsg} />
 			<button onClick={this.leaveChat}>WYJDŹ</button>
+			</Fragment> : 	<button onClick={this.joinChat}>Wejdź</button>}
 			</Fragment>
 			);
 	} 
