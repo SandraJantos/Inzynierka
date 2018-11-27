@@ -24,9 +24,9 @@ const port = process.env.PORT || 5000;
 //set env vars
 const bodyParser = require('body-parser');
 
-const db = process.env.MONGODB_URI;
+//const db = process.env.MONGODB_URI;
 
-//const db = require('./config/keys').mongoURI;
+const db = require('./config/keys').mongoURI;
 let dbUrl = 'mongodb://superSam:superSam123@ds155299.mlab.com:55299/sam_db';
 const mongoose = require('mongoose');
 let loggedUsers = [];
@@ -64,7 +64,7 @@ app.get('*', (req, res) => {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbUrl || process.env.MONGODB_URI, { useMongoClient: true })
+mongoose.connect(db)
     .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());
