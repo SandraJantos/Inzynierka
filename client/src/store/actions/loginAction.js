@@ -30,10 +30,7 @@ export const logout = (history) => dispatch => {
 
 export const login = (r,history) => (dispatch) => {
   console.log(history);
-  axios.post('/api/users/login/', {
-    password:r.password,
-    email:r.email
-  })
+  axios.post('/api/users/login/')
   .then(res => {
     const { token } = res.data;
     localStorage.setItem('jwtToken', token);
@@ -46,6 +43,12 @@ export const login = (r,history) => (dispatch) => {
   .catch(err => dispatch(errorAction(err)))
 }   
 
+export const loginByFb = (r,history) => (dispatch) => {
+  axios.get('/api/users/auth/facebook')
+  .then(res => console.log(res))
+  .catch(err => dispatch(errorAction(err)))
+}   
+
 export const getCurrentUser  = () => dispatch => {
   
  dispatch(setCurrentUser(jwt_decode(localStorage.getItem('jwtToken', 'token'))))
@@ -54,5 +57,5 @@ export default {
   logout,
   login,
   getCurrentUser,
-
+  loginByFb
 } 

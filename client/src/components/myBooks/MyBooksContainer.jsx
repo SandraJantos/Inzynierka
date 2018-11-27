@@ -13,6 +13,7 @@ class MyBooksContainer extends Component {
 			description:'',
 			isbn:'',
 			image:'',
+			category:''
 
 		} 
 	};     

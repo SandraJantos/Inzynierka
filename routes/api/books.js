@@ -40,6 +40,7 @@ router.post('/', upload.single('image'), (req,res) => {
   if (req.body.description) newBook.description = req.body.description;
   if (req.body.isbn) newBook.isbn = req.body.isbn;
   if (req.body.created) newBook.created = req.body.created;
+  if (req.body.category) newBook.category = req.body.category;
   if (req.file) newBook.image = req.file;
   new Book(newBook).save().then(book => res.json({image:req.file,...book}));
 

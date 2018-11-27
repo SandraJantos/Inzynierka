@@ -57,7 +57,10 @@ const BookSchema = new Schema({
   favourite :{
 	type: Boolean,
 	default: false
-} 
+},
+category:{
+	type:Number
+}
 }); 
 
 module.exports = Book = mongoose.model('books',BookSchema);

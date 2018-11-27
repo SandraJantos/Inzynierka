@@ -19,6 +19,9 @@ class LoginFormContainer extends Component {
 		this.props.login(this.state,this.props.history);
 	};
 
+	loginByFb = () => {
+		this.props.loginByFb();
+	}
 
 	componentDidUpdate(prevProps) {
 		if (this.props.errors !== prevProps.errors) {
@@ -29,7 +32,7 @@ class LoginFormContainer extends Component {
 	render() {
 		return ( 
 			<Fragment>
-			<LoginForm 
+			<LoginForm loginByFb={this.loginByFb}
 			errors={this.state.errors}
 			formData={this.state} 
 			onChange={v=>this.setState(v)} 
@@ -48,7 +51,9 @@ function mapStateToProps (state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		login: (state,history) => dispatch(loginAction.login(state,history))
+		login: (state,history) => dispatch(loginAction.login(state,history)),
+		loginByFb: () => dispatch(loginAction.loginByFb())
+
 	}
 }
 

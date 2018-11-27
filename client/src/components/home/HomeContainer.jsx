@@ -17,7 +17,9 @@ class HomeContainer extends Component {
 		this.state = {
 			action:null,
 			redirect:false,
-			reservedBooks:null
+			reservedBooks:null,
+			category:'',
+			searchByAttr:''
 		} 
 	};    
 
@@ -30,14 +32,21 @@ class HomeContainer extends Component {
 
 
 	filter = (books) => {
-		if (this.state.reservedBooks===true) {
+		const {reservedBooks,category} = this.state;
+		if (reservedBooks===true && category === '' ) {
 			return this.props.books.filter(e => e.reservationState!=='0')
+		}
+		else if (reservedBooks===true && category !== '') {
+			return this.props.books.filter(e => e.reservationState!=='0').filter(e => e.category===Number(category))
+		}
+		else if (reservedBooks===false && category !== '') {
+			return this.props.books.filter(e => e.reservationState==='0').filter(e => e.category===Number(category))
 		}
 		else{
 			return this.props.books.filter(e => e.reservationState==='0')
 		}
 
-	}
+	} 
 	openChat =() => {
 		const initLobby = {
 			name: "Lobby",
@@ -48,9 +57,11 @@ class HomeContainer extends Component {
 	}
 	render() { 
 		const {users,match,books} = this.props; 
+		const {category} = this.state;
 		return (
 			<Fragment>
-			<Home formData={this.state} books={this.filter(books)} users={users} currentUser={this.props.user.user} openChat={this.openChat}
+			<Home formData={this.state} 
+			books={this.filter(books)} users={users} currentUser={this.props.user.user} openChat={this.openChat}
 			 logout={this.props.logout} onChange={v=>this.setState(v)}
 				click={this.click} match={match} 
 				  />

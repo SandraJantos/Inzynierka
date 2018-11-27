@@ -5,11 +5,8 @@ import booksAction from 'store/actions/booksAction';
 import userAction from 'store/actions/userAction';
 import loginAction from 'store/actions/loginAction';
 import reservationAction from 'store/actions/reservationAction';
-
 import { withRouter } from 'react-router';
 import { Route, Redirect } from 'react-router-dom';
-
-
 
 class BookContainer extends Component { 
 	constructor (props) {
@@ -18,7 +15,8 @@ class BookContainer extends Component {
 			action:null,
 			redirect:false,
 			text:'',
-			userName:''
+			userName:'',
+			category:''
 		} 
 	};    
 

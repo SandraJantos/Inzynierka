@@ -27,6 +27,7 @@ export const createBook = (r,date,user) => dispatch => {
   formData.append('image', r.image);
   formData.append('created', date);
   formData.append('user', user);
+  formData.append('category', r.category);
 
   axios.post('/api/books/', formData, 'multipart/form-data')
   .then(() => dispatch(getBooksList()))

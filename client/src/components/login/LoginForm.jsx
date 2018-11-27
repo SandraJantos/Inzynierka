@@ -4,7 +4,7 @@ import Form from 'components/common/form/Form';
 class LoginForm extends Component {
 
 	render() { 
-	const {t, formData, onChange, action,errors} = this.props;
+	const {t, formData, onChange, loginByFb,action,errors} = this.props;
 	return (
 		<div className="mt-30 mb-30 panel panel-default">
 			<div className="outer"> 
@@ -18,7 +18,9 @@ class LoginForm extends Component {
 				/>
 				<div onClick={()=>onChange({email:'user1@user1.pl', password:'user1'})}>user1</div>
 				<div onClick={()=>onChange({email:'user2@user2.pl', password:'user2'})}>user2</div>	
-				<button onClick={()=>{action()}}> {'register'} </button>
+				<button onClick={()=>{action()}}>login</button>
+				<button onClick={()=>{loginByFb()}}>login</button>
+
 			</div>
 		</div> 
 	);  	

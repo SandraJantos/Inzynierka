@@ -7,7 +7,7 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 const validateRegisterData= require('../../validation/register');
 const validateLoginData= require('../../validation/login');
-
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 
 router.post('/register',(req,res) => {
@@ -119,6 +119,40 @@ router.get(
     });
   } 
 );
+passport.use('facebookToken',new FacebookStrategy({
+    clientID: keys.facebookAuth.clientID,
+    clientSecret: keys.facebookAuth.clientSecret,
+    callbackURL: keys.facebookAuth.callbackURL
+  },
+  (accessToken, refreshToken, profile, done) => {
+ 	process.nextTick(()=>{
+ 		User.findOne({'facebook.id':profile.id}, (err,user) => {
+ 			if(err) return done(err);
+ 			if(user) return done(null,err);
+ 			else{
+ 				let newUser = new User();
+ 				newUser.facebook.id = profile.id;
+ 				newUser.facebook.token = accessToken;
+ 				newUser.facebook.name = profile.name.givenName + ' ' + profile.name.familyName;
+ 				newUser.facebook.email = profile.emails[0].value;
+
+ 				newUser.save(err => {
+ 					if (err) throw err;
+ 					return done(null,newUser);
+ 				})
+
+ 			}
+ 		})
+ 	});
+
+  }
+));
+router.get('/auth/facebook',
+  passport.authenticate('facebookToken', { session: false })
+);
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { successRedirect: '/',
+                                      failureRedirect: '/login' }));
 
 module.exports = router;
 

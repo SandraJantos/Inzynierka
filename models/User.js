@@ -31,6 +31,13 @@ const UserSchema = new Schema({
 		type:Number,
 		default: 0
 
+	},
+
+	facebook:{
+		id:String,
+		token:String,
+		email:String,
+		name:String
 	}
 
 }); 
