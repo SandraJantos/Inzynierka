@@ -64,7 +64,7 @@ app.get('*', (req, res) => {
 }
 
 mongoose.Promise = global.Promise;
-mongoose.connect(db)
+mongoose.connect(db, { useNewUrlParser: true })
     .then(() => console.log("sucdsdsdsddddcess"))
     .catch(err => console.log(err))
 app.use(passport.initialize());

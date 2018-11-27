@@ -22,7 +22,7 @@
     "url": "https://github.com/SandraJantos/Inzynierka/issues"
   },
   "engines": {
-    "node": "^8.10.0"
+    "node": "^8.10.0" 
   },
   "homepage": "https://github.com/SandraJantos/Inzynierka#readme",
   "dependencies": {
